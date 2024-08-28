@@ -46,5 +46,3 @@ public class UsuarioControllers {
         uService.eliminar(id);
     }
 }
-
-//preguntar a la profe
