@@ -16,4 +16,26 @@ public class UsuarioServicesImplements implements IUsuarioInterfaces {
     public List<Usuario> list(){
         return usuarioRepository.findAll();
     }
+
+    @Override
+    public void add(Usuario usuario) {
+        usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public Usuario listId(int id) {
+        return usuarioRepository.findById(id).orElse(new Usuario());
+    }
+
+    @Override
+    public void modificar(Usuario usuario) {
+         usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public void eliminar(int id) {
+        usuarioRepository.deleteById(id);
+    }
+
+
 }
