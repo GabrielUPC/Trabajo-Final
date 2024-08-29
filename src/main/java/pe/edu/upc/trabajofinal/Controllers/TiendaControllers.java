@@ -48,4 +48,11 @@ public class TiendaControllers {
     public void delete(@PathVariable("id") Integer id){
         tService.eliminar(id);
     }
+    @GetMapping("/busquedas")
+    public List<TiendaDTO> buscar(@RequestParam String nombre){
+        return tService.Buscar(nombre).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,TiendaDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

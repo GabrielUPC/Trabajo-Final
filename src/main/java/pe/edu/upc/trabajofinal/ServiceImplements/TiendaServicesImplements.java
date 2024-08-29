@@ -38,5 +38,10 @@ public class TiendaServicesImplements implements ITiendaInterfaces {
         tiendaRepository.deleteById(id);
     }
 
+    @Override
+    public List<Tiendas> Buscar(String nombre) {
+        return tiendaRepository.Buscar(nombre);
+    }
+
 
 }

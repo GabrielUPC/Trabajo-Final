@@ -11,4 +11,6 @@ public interface ITiendaInterfaces {
     public Tiendas listId(int id);
     public void modificar(Tiendas tienda);
     public void eliminar(int id);
+    List<Tiendas> Buscar(String nombre);
+
 }
