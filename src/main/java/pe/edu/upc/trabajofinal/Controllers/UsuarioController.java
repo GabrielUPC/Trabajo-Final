@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioControllers {
+public class UsuarioController {
     @Autowired
     private IUsuarioInterfaces uService;
 
