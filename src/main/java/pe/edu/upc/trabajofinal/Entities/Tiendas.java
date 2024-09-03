@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Tiendas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idTiendas;
     @Column(name = "nombre",nullable = false,length = 10)
     private String nombre;
     @Column(name = "descripcion", nullable = false, length =100)
@@ -16,12 +16,19 @@ public class Tiendas {
 
     public Tiendas() {}
 
+    public Tiendas(int idTiendas, String nombre, String descripcion, String direccion) {
+        this.idTiendas = idTiendas;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.direccion = direccion;
+    }
+
     public int getId() {
-        return id;
+        return idTiendas;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idTiendas = id;
     }
 
     public String getNombre() {

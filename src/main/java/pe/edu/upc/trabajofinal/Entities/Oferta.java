@@ -5,10 +5,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name="Oferta")
 public class Oferta {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Integer idOferta;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idOferta;
     @Column(name="nombreOferta", nullable=false,length = 45)
     private String nombreOferta;
     @Column(name="fechaInicio", nullable=false)
@@ -21,8 +22,8 @@ public class Oferta {
     public Oferta() {
     }
 
-    public Oferta(Integer id, String nombreOferta, LocalDate fechaInicio, LocalDate fechaFin, int cantidadProductos) {
-        this.idOferta = idOferta;
+    public Oferta(int id, String nombreOferta, LocalDate fechaInicio, LocalDate fechaFin, int cantidadProductos) {
+        this.idOferta = id;
         this.nombreOferta = nombreOferta;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;

@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import java.time.LocalDate;
 
 public class OfertaDTO {
+
     private Integer idOferta;
 
     private String nombreOferta;

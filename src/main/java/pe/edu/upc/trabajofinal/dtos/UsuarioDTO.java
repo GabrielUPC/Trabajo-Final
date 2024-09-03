@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 public class UsuarioDTO {
 
-    private int id;
+    private int idUsuario;
 
     private int dni;
 
@@ -24,11 +24,11 @@ public class UsuarioDTO {
     private String username;
 
     public int getId() {
-        return id;
+        return idUsuario;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idUsuario = id;
     }
 
     public int getDni() {

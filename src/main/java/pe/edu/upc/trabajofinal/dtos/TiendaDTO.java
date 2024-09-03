@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 public class TiendaDTO {
 
-    private int id;
+    private int idTiendas;
 
     private String nombre;
 
@@ -17,11 +17,11 @@ public class TiendaDTO {
 
 
     public int getId() {
-        return id;
+        return idTiendas;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idTiendas = id;
     }
 
     public String getNombre() {
