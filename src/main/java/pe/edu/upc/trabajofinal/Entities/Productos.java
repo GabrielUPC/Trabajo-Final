@@ -11,7 +11,7 @@ public class Productos {
     private int idProducto;
     @Column(name="nombreProducto",nullable = false,length = 20)
     private String nombreProducto;
-    @Column(name="nombreProducto",nullable = false,length = 100)
+    @Column(name="descripcionProducto",nullable = false,length = 100)
     private String descripcionProducto;
     @Column(name="precioProducto",nullable = false)
     private double precioProducto;
