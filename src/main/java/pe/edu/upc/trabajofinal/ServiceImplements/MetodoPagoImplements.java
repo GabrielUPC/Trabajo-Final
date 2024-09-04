@@ -7,48 +7,39 @@ import pe.edu.upc.trabajofinal.Repositories.IMetodoPagoRepository;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IMetodoPagoInterface;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class MetodoPagoImplements implements IMetodoPagoInterface {
 
     @Autowired
-    private IMetodoPagoRepository metodoPagoRepository;
+    private IMetodoPagoRepository mR;
+
 
     @Override
-    public MetodoPago save(MetodoPago metodoPago) {
-        return metodoPagoRepository.save(metodoPago);
+    public List<MetodoPago> list() {
+        return mR.findAll();
     }
 
     @Override
-    public MetodoPago update(MetodoPago metodoPago) {
-        // Check if the MetodoPago exists before updating
-        Optional<MetodoPago> existingMetodoPago = metodoPagoRepository.findById(metodoPago.getId());
-        if (existingMetodoPago.isPresent()) {
-            return metodoPagoRepository.save(metodoPago);
-        } else {
-            throw new IllegalArgumentException("MetodoPago con ID " + metodoPago.getId() + " no existe.");
-        }
+    public void save(MetodoPago metodoPago) {
+        mR.save(metodoPago);
+    }
+
+    @Override
+    public MetodoPago listid(int id) {
+        return mR.findById(id).orElse(new MetodoPago());
+    }
+
+    @Override
+    public void modificar(MetodoPago metodoPago) {
+        mR.save(metodoPago);
     }
 
     @Override
     public void deleteById(Integer id) {
-        // Check if the MetodoPago exists before deleting
-        Optional<MetodoPago> existingMetodoPago = metodoPagoRepository.findById(id);
-        if (existingMetodoPago.isPresent()) {
-            metodoPagoRepository.deleteById(id);
-        } else {
-            throw new IllegalArgumentException("MetodoPago con ID " + id + " no existe.");
-        }
+        mR.deleteById(id);
     }
 
-    @Override
-    public Optional<MetodoPago> findById(Integer id) {
-        return metodoPagoRepository.findById(id);
-    }
 
-    @Override
-    public List<MetodoPago> findAll() {
-        return metodoPagoRepository.findAll();
-    }
 }

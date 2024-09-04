@@ -7,27 +7,27 @@ public class MetodoPago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(name="Nombre", nullable=false, length = 30)
     private String nombre;
 
     @Column(name="Tipo", nullable=false, length = 30)
     private String tipo;
+    @ManyToOne
+    @JoinColumn(name="idProductos")
+    private Productos p;
 
-    // Foreign Key (FK) - Relación con otra entidad (CarritoXProducto) mmm no iria creo
-    /// @ManyToOne
-    ///  @JoinColumn(name = "CarritoxProducto_id", nullable = false)
-    /// private CarritoXProducto carritoXProducto; // Esto es una relación ManyToOne
-    // Constructor por defecto
     public MetodoPago() {
     }
-    public MetodoPago(String nombre, String tipo) {
+
+    public MetodoPago(int id, String nombre, String tipo, Productos p) {
+        this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
+        this.p = p;
     }
 
-    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -52,4 +52,11 @@ public class MetodoPago {
         this.tipo = tipo;
     }
 
+    public Productos getP() {
+        return p;
+    }
+
+    public void setP(Productos p) {
+        this.p = p;
+    }
 }

@@ -3,13 +3,13 @@ package pe.edu.upc.trabajofinal.ServiceInterfaces;
 import pe.edu.upc.trabajofinal.Entities.MetodoPago;
 
 import java.util.List;
-import java.util.Optional;
+
 
 public interface IMetodoPagoInterface {
+    public List<MetodoPago> list();
+    public void save(MetodoPago metodoPago);
+    public MetodoPago listid(int id);
+    public void modificar(MetodoPago metodoPago);
+    public void deleteById(Integer id);
 
-    MetodoPago save(MetodoPago metodoPago);
-    MetodoPago update(MetodoPago metodoPago);
-    void deleteById(Integer id);
-    Optional<MetodoPago> findById(Integer id);
-    List<MetodoPago> findAll();
 }

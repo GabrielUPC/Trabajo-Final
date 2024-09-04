@@ -1,84 +1,63 @@
 package pe.edu.upc.trabajofinal.Controllers;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.MetodoPago;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IMetodoPagoInterface;
 import pe.edu.upc.trabajofinal.dtos.MetodoPagoDTO;
+import pe.edu.upc.trabajofinal.dtos.OfertaDTO;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/metodo-pagos")
 public class MetodoPagoController {
 
     @Autowired
-    private IMetodoPagoInterface metodoPagoService;
+    private IMetodoPagoInterface mP;
 
     // Crear un nuevo método de pago
     @PostMapping
-    public ResponseEntity<MetodoPagoDTO> createMetodoPago(@RequestBody MetodoPagoDTO metodoPagoDTO) {
-        MetodoPago metodoPago = convertToEntity(metodoPagoDTO);
-        MetodoPago savedMetodoPago = metodoPagoService.save(metodoPago);
-        MetodoPagoDTO savedMetodoPagoDTO = convertToDTO(savedMetodoPago);
-        return ResponseEntity.ok(savedMetodoPagoDTO);
+    public void insertar(@RequestBody MetodoPagoDTO dto){
+        ModelMapper m=new ModelMapper();
+        MetodoPago mp=m.map(dto,MetodoPago.class);
+        mP.save(mp);
     }
 
-    // Obtener un método de pago por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<MetodoPagoDTO> getMetodoPagoById(@PathVariable Integer id) {
-        Optional<MetodoPago> metodoPago = metodoPagoService.findById(id);
-        if (metodoPago.isPresent()) {
-            MetodoPagoDTO metodoPagoDTO = convertToDTO(metodoPago.get());
-            return ResponseEntity.ok(metodoPagoDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping()
+    public List<MetodoPagoDTO> list() {
+        return mP.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, MetodoPagoDTO.class);
+        }).collect(Collectors.toList());
     }
 
     // Obtener todos los métodos de pago
-    @GetMapping
-    public ResponseEntity<List<MetodoPagoDTO>> getAllMetodoPagos() {
-        List<MetodoPago> metodoPagos = metodoPagoService.findAll();
-        List<MetodoPagoDTO> metodoPagoDTOs = metodoPagos.stream().map(this::convertToDTO).toList();
-        return ResponseEntity.ok(metodoPagoDTOs);
+    @GetMapping("/{id}")
+    public MetodoPagoDTO ordenarbyid(@PathVariable("id") Integer id) {
+        ModelMapper m = new ModelMapper();
+        MetodoPagoDTO dto=m.map(mP.listid(id),MetodoPagoDTO.class);
+        return dto;
     }
 
     // Actualizar un método de pago
     @PutMapping("/{id}")
-    public ResponseEntity<MetodoPagoDTO> updateMetodoPago(@PathVariable Integer id, @RequestBody MetodoPagoDTO metodoPagoDTO) {
-        MetodoPago metodoPago = convertToEntity(metodoPagoDTO);
-        metodoPago.setId(id);
-        MetodoPago updatedMetodoPago = metodoPagoService.update(metodoPago);
-        MetodoPagoDTO updatedMetodoPagoDTO = convertToDTO(updatedMetodoPago);
-        return ResponseEntity.ok(updatedMetodoPagoDTO);
+    public void modificar(@RequestBody MetodoPagoDTO dto) {
+        ModelMapper m = new ModelMapper();
+        MetodoPago d=m.map(dto,MetodoPago.class);
+        mP.modificar(d);
     }
 
     // Eliminar un método de pago
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMetodoPago(@PathVariable Integer id) {
-        metodoPagoService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public void eliminar(@PathVariable("id") Integer id) {
+        mP.deleteById(id);
     }
 
-    // Métodos de conversión
-    private MetodoPagoDTO convertToDTO(MetodoPago metodoPago) {
-        MetodoPagoDTO dto = new MetodoPagoDTO();
-        dto.setId(metodoPago.getId());
-        dto.setNombre(metodoPago.getNombre());
-        dto.setTipo(metodoPago.getTipo());
-        //dto.setCarritoXProductoId(metodoPago.getCarritoXProductoId());
-        return dto;
-    }
 
-    private MetodoPago convertToEntity(MetodoPagoDTO dto) {
-        MetodoPago metodoPago = new MetodoPago();
-        metodoPago.setId(dto.getId());
-        metodoPago.setNombre(dto.getNombre());
-        metodoPago.setTipo(dto.getTipo());
-        //metodoPago.setCarritoXProductoId(dto.getCarritoXProductoId());
-        return metodoPago;
-    }
+
 }

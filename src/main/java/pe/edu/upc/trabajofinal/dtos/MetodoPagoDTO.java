@@ -1,13 +1,23 @@
 package pe.edu.upc.trabajofinal.dtos;
 
+import jakarta.persistence.*;
+import pe.edu.upc.trabajofinal.Entities.Productos;
+
 public class MetodoPagoDTO {
 
-    private Integer id;
-    private String nombre;
-    private String tipo;
-    //private Integer carritoXProductoId; // FK
 
-    // Getters y Setters
+    private int id;
+
+
+    private String nombre;
+
+
+    private String tipo;
+
+    private Productos p;
+
+
+
     public Integer getId() {
         return id;
     }
@@ -32,11 +42,11 @@ public class MetodoPagoDTO {
         this.tipo = tipo;
     }
 
-    //public Integer getCarritoXProductoId() {
-    //return carritoXProductoId;
-    //}
+    public Productos getP() {
+        return p;
+    }
 
-    //public void setCarritoXProductoId(Integer carritoXProductoId) {
-    //this.carritoXProductoId = carritoXProductoId;
-    //}
+    public void setP(Productos p) {
+        this.p = p;
+    }
 }
