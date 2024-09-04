@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping
+@RequestMapping("/ofertas")
 public class OfertaController {
     @Autowired
     private IOfertaInterface Oi;
