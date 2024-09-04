@@ -1,6 +1,5 @@
 package pe.edu.upc.trabajofinal.ServiceInterfaces;
 
-import pe.edu.upc.trabajofinal.Entities.Oferta;
 import pe.edu.upc.trabajofinal.Entities.Pedido;
 
 import java.util.List;
