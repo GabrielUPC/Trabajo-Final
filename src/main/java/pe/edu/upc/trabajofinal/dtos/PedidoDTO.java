@@ -9,7 +9,6 @@ public class PedidoDTO {
     private LocalDate fechacPedido;
     private LocalDate fechaEntrega;
     private String estado;
-    private String reciboCompra;
 
     public int getId() {
         return id;
@@ -41,13 +40,5 @@ public class PedidoDTO {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public String getReciboCompra() {
-        return reciboCompra;
-    }
-
-    public void setReciboCompra(String reciboCompra) {
-        this.reciboCompra = reciboCompra;
     }
 }

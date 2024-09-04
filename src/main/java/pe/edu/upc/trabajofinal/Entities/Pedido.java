@@ -15,18 +15,15 @@ public class Pedido {
     private LocalDate fechaEntrega;
     @Column(name ="estado",length = 20,nullable = false)
     private String estado;
-    @Column(name ="reciboCompra",length = 300,nullable = false)
-    private String reciboCompra;
 
     public Pedido() {
     }
 
-    public Pedido(int id, LocalDate fechacPedido, LocalDate fechaEntrega, String estado, String reciboCompra) {
+    public Pedido(int id, LocalDate fechacPedido, LocalDate fechaEntrega, String estado) {
         this.id = id;
         this.fechacPedido = fechacPedido;
         this.fechaEntrega = fechaEntrega;
         this.estado = estado;
-        this.reciboCompra = reciboCompra;
     }
 
     public int getId() {
@@ -59,13 +56,5 @@ public class Pedido {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public String getReciboCompra() {
-        return reciboCompra;
-    }
-
-    public void setReciboCompra(String reciboCompra) {
-        this.reciboCompra = reciboCompra;
     }
 }
