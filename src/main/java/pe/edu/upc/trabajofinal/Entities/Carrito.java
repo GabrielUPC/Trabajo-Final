@@ -3,6 +3,9 @@ package pe.edu.upc.trabajofinal.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Carrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +20,8 @@ public class Carrito {
 
     @Column(name="estadoCarrito", nullable=false, length=30)
     private String estadoCarrito;
-
+    @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL)
+    private Set<CarritoXProducto> productos = new HashSet<>();
     public Carrito() {
     }
 

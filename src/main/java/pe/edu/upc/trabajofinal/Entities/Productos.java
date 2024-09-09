@@ -3,6 +3,9 @@ package pe.edu.upc.trabajofinal.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="Productos")
 public class Productos {
@@ -30,7 +33,10 @@ public class Productos {
     @ManyToOne
     @JoinColumn(name="idOfertas")
     private Oferta o;
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private Set<CarritoXProducto> carritos = new HashSet<>();
     public Productos() {}
+
 
     public Productos(int idProducto, String nombreProducto, String descripcionProducto, double precioProducto, String estadoProducto, LocalDate fecha_vencimientoProducto, int stockProducto, Usuario u, Tiendas t, Oferta o) {
         this.idProducto = idProducto;
