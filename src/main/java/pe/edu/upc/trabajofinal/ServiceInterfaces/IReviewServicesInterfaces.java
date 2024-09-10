@@ -11,5 +11,6 @@ public interface IReviewServicesInterfaces {
     public Review listId(int id);
     public void modificar(Review review);
     public void eliminar(int id);
+    public List<String[]> mostrarReviewProoductos(int id);
 
 }

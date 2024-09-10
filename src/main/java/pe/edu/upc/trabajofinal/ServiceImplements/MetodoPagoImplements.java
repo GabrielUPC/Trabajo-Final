@@ -37,7 +37,7 @@ public class MetodoPagoImplements implements IMetodoPagoInterface {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(int id) {
         mR.deleteById(id);
     }
 

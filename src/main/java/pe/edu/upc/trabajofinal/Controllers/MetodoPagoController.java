@@ -45,7 +45,7 @@ public class MetodoPagoController {
     }
 
     // Actualizar un método de pago
-    @PutMapping("/{id}")
+    @PutMapping
     public void modificar(@RequestBody MetodoPagoDTO dto) {
         ModelMapper m = new ModelMapper();
         MetodoPago d=m.map(dto,MetodoPago.class);

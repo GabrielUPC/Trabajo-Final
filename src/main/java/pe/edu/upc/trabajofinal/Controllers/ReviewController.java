@@ -7,9 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Review;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IReviewServicesInterfaces;
+import pe.edu.upc.trabajofinal.dtos.ReporteOfertaActivas;
 import pe.edu.upc.trabajofinal.dtos.ReviewDTO;
+import pe.edu.upc.trabajofinal.dtos.ReviewProductosDTO;
 import pe.edu.upc.trabajofinal.dtos.UsuarioDTO;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,4 +51,5 @@ public class ReviewController {
     private void deletebyid(@PathVariable("id") Integer id){
         rS.eliminar(id);
     }
+
 }

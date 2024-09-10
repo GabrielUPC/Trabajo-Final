@@ -8,8 +8,10 @@ import pe.edu.upc.trabajofinal.Entities.Usuario;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IOfertaInterface;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IUsuarioInterfaces;
 import pe.edu.upc.trabajofinal.dtos.OfertaDTO;
+import pe.edu.upc.trabajofinal.dtos.ReporteOfertaActivas;
 import pe.edu.upc.trabajofinal.dtos.UsuarioDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,5 +48,16 @@ public class OfertaController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Integer id){
         Oi.eliminar(id);
+    }
+    @GetMapping("/ofertasactivas")
+    public List<ReporteOfertaActivas> ofertaActivas(){
+        List<String[]> lista=Oi.ofertasactivas();
+        List<ReporteOfertaActivas> listaDTO=new ArrayList<>();
+        for(String[] columna:lista){
+            ReporteOfertaActivas dto=new ReporteOfertaActivas();
+            dto.setNombreOferta(columna[0]);
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 }

@@ -39,4 +39,9 @@ public class OfertaServiceImplements implements IOfertaInterface {
     public void eliminar(int id) {oR.deleteById(id);
 
     }
+
+    @Override
+    public List<String[]> ofertasactivas() {
+        return oR.ofertasactivas();
+    }
 }

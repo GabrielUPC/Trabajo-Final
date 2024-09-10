@@ -11,4 +11,5 @@ public interface IOfertaInterface {
     public Oferta listId(int id);
     public void modificar(Oferta oferta);
     public void eliminar(int id);
+    public List<String[]> ofertasactivas();
 }

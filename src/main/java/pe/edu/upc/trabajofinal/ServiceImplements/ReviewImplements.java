@@ -35,4 +35,9 @@ public class ReviewImplements implements IReviewServicesInterfaces {
     public void eliminar(int id) {
         rR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> mostrarReviewProoductos(int id) {
+        return rR.reviewproductos(id);
+    }
 }
