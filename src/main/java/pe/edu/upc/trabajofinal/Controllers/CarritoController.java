@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Carrito;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ICarritoInterface;
 import pe.edu.upc.trabajofinal.dtos.CarritoDTO;
-import pe.edu.upc.trabajofinal.dtos.OfertaDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
