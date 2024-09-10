@@ -8,6 +8,7 @@ import pe.edu.upc.trabajofinal.Entities.Productos;
 import pe.edu.upc.trabajofinal.Repositories.IPedidoRepository;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IPedidoInterface;
 
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class PedidoServiceImplement implements IPedidoInterface {
@@ -31,6 +32,11 @@ public class PedidoServiceImplement implements IPedidoInterface {
     @Override
     public void modificar(Pedido pedido) {
         pR.save(pedido);
+    }
+
+    @Override
+    public List<Pedido> findPedidosEntreFechas(LocalDate fechaInicio, LocalDate fechaFin) {
+        return pR.findPedidosEntreFechas(fechaInicio,fechaFin);
     }
 
     @Override

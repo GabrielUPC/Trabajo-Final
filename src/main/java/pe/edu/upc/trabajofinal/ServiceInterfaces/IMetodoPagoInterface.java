@@ -10,6 +10,7 @@ public interface IMetodoPagoInterface {
     public void save(MetodoPago metodoPago);
     public MetodoPago listid(int id);
     public void modificar(MetodoPago metodoPago);
+    public List<MetodoPago> findMetodoPagoByTipo(String tipo);
     public void deleteById(int id);
 
 }
