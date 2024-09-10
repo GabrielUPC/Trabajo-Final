@@ -7,6 +7,7 @@ import pe.edu.upc.trabajofinal.Entities.Productos;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ProductosInterfaces;
 import pe.edu.upc.trabajofinal.dtos.ProductoEnOfeta;
 import pe.edu.upc.trabajofinal.dtos.ProductosDTO;
+import pe.edu.upc.trabajofinal.dtos.ReviewDTO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -64,5 +65,20 @@ public class ProductosController {
             listaDTO.add(dto);
         }
         return listaDTO;
+    }
+
+    @GetMapping("/obtenerreseñasporProducto")
+    public List<ReviewDTO> ObtenerResenasProducto(@RequestParam String nombreProducto) {
+        List<String[]>lista = Ip.ObtenerResenasProducto(nombreProducto);
+        List<ReviewDTO>listaDTO= new ArrayList<>();
+        for (String[]columna : lista)
+        {
+            ReviewDTO dto= new ReviewDTO();
+            dto.setCalificacion(Integer.parseInt(columna[0]));
+            dto.setComentarios(columna[1]);
+            dto.setFecha(LocalDate.parse(columna[2]));
+            listaDTO.add(dto);
+        }
+         return listaDTO;
     }
 }
