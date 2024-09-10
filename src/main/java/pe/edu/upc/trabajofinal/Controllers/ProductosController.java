@@ -2,13 +2,14 @@ package pe.edu.upc.trabajofinal.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Productos;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ProductosInterfaces;
+import pe.edu.upc.trabajofinal.dtos.ProductoEnOfeta;
 import pe.edu.upc.trabajofinal.dtos.ProductosDTO;
-import pe.edu.upc.trabajofinal.dtos.UsuarioDTO;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,5 +47,22 @@ public class ProductosController {
     private void eliminar(@PathVariable("id") Integer id)
     {
         Ip.eliminar(id);
+    }
+    @GetMapping("/ProductosEnOferta")
+    private List<ProductoEnOfeta> ProductoEnOfeta()
+    {
+        List<String[]>lista =Ip.ProductoEnOfeta();
+        List<ProductoEnOfeta> listaDTO = new ArrayList<>();
+        for (String[] columna : lista)
+        {
+            ProductoEnOfeta dto = new ProductoEnOfeta();
+            dto.setProducto(columna[0]);
+            dto.setNombreOfeta(columna[1]);
+            dto.setFechaInicial(LocalDate.parse(columna[2]));
+            dto.setFechaFinal(LocalDate.parse(columna[3]));
+            dto.setCantidadProducto(Integer.parseInt(columna[4]));
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 }

@@ -35,6 +35,13 @@ public class MetodoPagoController {
             return m.map(x, MetodoPagoDTO.class);
         }).collect(Collectors.toList());
     }
+    @GetMapping("/findMetodoPagoByTipo")
+    public List<MetodoPagoDTO> findMetodoPagoByTipo(@RequestParam String tipo) {
+        return mP.findMetodoPagoByTipo(tipo).stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, MetodoPagoDTO.class);
+        }).collect(Collectors.toList());
+    }
 
     // Obtener todos los métodos de pago
     @GetMapping("/{id}")

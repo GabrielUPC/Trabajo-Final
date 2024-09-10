@@ -37,6 +37,11 @@ public class MetodoPagoImplements implements IMetodoPagoInterface {
     }
 
     @Override
+    public List<MetodoPago> findMetodoPagoByTipo(String tipo) {
+        return mR.findMetodoPagoByTipo(tipo);
+    }
+
+    @Override
     public void deleteById(int id) {
         mR.deleteById(id);
     }

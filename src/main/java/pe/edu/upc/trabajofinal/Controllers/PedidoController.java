@@ -10,6 +10,7 @@ import pe.edu.upc.trabajofinal.ServiceInterfaces.IPedidoInterface;
 import pe.edu.upc.trabajofinal.dtos.NotificacionesDTO;
 import pe.edu.upc.trabajofinal.dtos.PedidoDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 @RestController
@@ -35,6 +36,14 @@ public class PedidoController {
         ModelMapper m=new ModelMapper();
         PedidoDTO dto=m.map(pI.listId(id), PedidoDTO.class);
         return dto;
+
+    }
+    @GetMapping("/pedidos-entre-fechas")
+    public List<PedidoDTO> listarPedidosEntreFechas(@RequestParam LocalDate fechaInicio, @RequestParam LocalDate fechaFin) {
+        return pI.findPedidosEntreFechas(fechaInicio, fechaFin).stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, PedidoDTO.class);
+        }).collect(Collectors.toList());
     }
     @PutMapping
     public void modificar(@RequestBody PedidoDTO dto){
