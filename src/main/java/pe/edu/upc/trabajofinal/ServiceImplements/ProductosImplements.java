@@ -36,4 +36,9 @@ public class ProductosImplements implements ProductosInterfaces {
         return pR.findById(id).orElse(new Productos());
     }
 
+    @Override
+    public List<String[]> ProductoEnOfeta() {
+        return pR.ProductoEnOfeta();
+    }
+
 }
