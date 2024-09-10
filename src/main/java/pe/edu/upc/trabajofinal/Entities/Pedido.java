@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idPedido ;
     @Column(name ="fechacPedido",nullable = false)
     private LocalDate fechacPedido;
     @Column(name ="fechaEntrega",nullable = false)
@@ -16,22 +16,31 @@ public class Pedido {
     @Column(name ="estado",length = 20,nullable = false)
     private String estado;
 
+    @OneToOne
+    @JoinColumn(name="idCarrito")
+    private Carrito c;
+    @OneToOne
+    @JoinColumn(name="idProducto")
+    private Productos p;
+
     public Pedido() {
     }
 
-    public Pedido(int id, LocalDate fechacPedido, LocalDate fechaEntrega, String estado) {
-        this.id = id;
+    public Pedido(int idPedido, LocalDate fechacPedido, LocalDate fechaEntrega, String estado, Carrito c, Productos p) {
+        this.idPedido = idPedido;
         this.fechacPedido = fechacPedido;
         this.fechaEntrega = fechaEntrega;
         this.estado = estado;
+        this.c = c;
+        this.p = p;
     }
 
-    public int getId() {
-        return id;
+    public int getIdPedido() {
+        return idPedido;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
     }
 
     public LocalDate getFechacPedido() {
@@ -56,5 +65,21 @@ public class Pedido {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Carrito getC() {
+        return c;
+    }
+
+    public void setC(Carrito c) {
+        this.c = c;
+    }
+
+    public Productos getP() {
+        return p;
+    }
+
+    public void setP(Productos p) {
+        this.p = p;
     }
 }
