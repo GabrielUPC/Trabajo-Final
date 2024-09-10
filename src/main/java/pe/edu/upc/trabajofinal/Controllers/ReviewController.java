@@ -47,9 +47,23 @@ public class ReviewController {
         Review r=m.map(dto, Review.class);
         rS.modificar(r);
     }
-    @DeleteMapping
+    @DeleteMapping("{id}")
     private void deletebyid(@PathVariable("id") Integer id){
         rS.eliminar(id);
     }
+    @GetMapping("/reviewProductos")
+    public List<ReviewProductosDTO> ReviewdeProductos(@RequestParam Integer id){
+        List<String[]> lista=rS.mostrarReviewProoductos(id);
+        List<ReviewProductosDTO> listaDTO=new ArrayList<>();
+        for(String[] columna:lista){
+            ReviewProductosDTO dto=new ReviewProductosDTO();
+            dto.setCalificacion(Integer.parseInt(columna[0]));
+            dto.setComentarios(columna[1]);
+            dto.setFecha(LocalDate.parse(columna[2]));
+            listaDTO.add(dto);
+        }
+        return listaDTO;
+    }
+
 
 }
