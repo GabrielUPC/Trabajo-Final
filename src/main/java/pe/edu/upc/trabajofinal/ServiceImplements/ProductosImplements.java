@@ -41,4 +41,12 @@ public class ProductosImplements implements ProductosInterfaces {
         return pR.ProductoEnOfeta();
     }
 
+
+    @Override
+    public List<String[]> ObtenerResenasProducto(String nombreProducto) {
+        return pR.ObtenerReseñasProducto(nombreProducto);
+    }
+
+
+
 }
