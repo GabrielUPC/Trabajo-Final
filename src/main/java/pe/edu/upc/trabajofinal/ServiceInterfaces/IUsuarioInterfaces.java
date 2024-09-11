@@ -11,5 +11,6 @@ public interface IUsuarioInterfaces {
     public Usuario listId(int id);
     public void modificar(Usuario usuario);
     public void eliminar(int id);
+    List<String[]> UsuarioReclamo();
 
 }

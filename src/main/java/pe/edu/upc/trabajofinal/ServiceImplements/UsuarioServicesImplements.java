@@ -37,5 +37,10 @@ public class UsuarioServicesImplements implements IUsuarioInterfaces {
         usuarioRepository.deleteById(id);
     }
 
+    @Override
+    public List<String[]> UsuarioReclamo() {
+        return usuarioRepository.UsuarioReclamo();
+    }
+
 
 }

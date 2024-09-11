@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Usuario;
 import pe.edu.upc.trabajofinal.dtos.UsuarioDTO;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IUsuarioInterfaces;
+import pe.edu.upc.trabajofinal.dtos.UsuarioReclamoDTO;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,5 +47,19 @@ public class UsuarioController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Integer id){
         uService.eliminar(id);
+    }
+    @GetMapping("/usuariosReclamos")
+    public List<UsuarioReclamoDTO> UsuarioReclamo(){
+        List<String[]> lista = uService.UsuarioReclamo();
+        List<UsuarioReclamoDTO> listaDTO = new ArrayList<>();
+        for (String[] columna : lista)
+        {
+            UsuarioReclamoDTO dto= new UsuarioReclamoDTO();
+            dto.setNombreUsuario(columna[0]);
+            dto.setContenidoReclamo(columna[1]);
+            dto.setFechaReclamo(LocalDate.parse(columna[2]));
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 }
