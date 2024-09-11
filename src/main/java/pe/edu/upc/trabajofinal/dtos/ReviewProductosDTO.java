@@ -3,18 +3,11 @@ package pe.edu.upc.trabajofinal.dtos;
 import java.time.LocalDate;
 
 public class ReviewProductosDTO {
-    private int idProducto;
+
     private int calificacion;
     private String comentarios;
     private LocalDate fecha;
 
-    public int getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
-    }
 
     public int getCalificacion() {
         return calificacion;
