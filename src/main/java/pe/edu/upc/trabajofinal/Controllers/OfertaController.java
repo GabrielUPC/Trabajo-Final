@@ -49,6 +49,7 @@ public class OfertaController {
     public void delete(@PathVariable("id") Integer id){
         Oi.eliminar(id);
     }
+
     @GetMapping("/ofertasactivas")
     public List<ReporteOfertaActivas> ofertaActivas(){
         List<String[]> lista=Oi.ofertasactivas();

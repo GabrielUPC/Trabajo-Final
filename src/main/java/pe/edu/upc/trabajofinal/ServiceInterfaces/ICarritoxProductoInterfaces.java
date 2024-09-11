@@ -10,4 +10,5 @@ public interface ICarritoxProductoInterfaces {
     public void add(CarritoxProducto producto);
     public void modificar(CarritoxProducto producto);
     public void eliminar(int id);
+    Double calcularMontoTotal(int idCarrito);
 }

@@ -45,5 +45,9 @@ public class CarritoxProductoController {
     private void eliminar(@PathVariable("id") Integer id) {
         Icp.eliminar(id);
     }
+    @GetMapping("/montoTotal/{idCarrito}")
 
+    public Double calcularMontoTotal(@PathVariable("idCarrito") int idCarrito) {
+        return Icp.calcularMontoTotal(idCarrito);
+    }
 }

@@ -37,4 +37,11 @@ public class CarritoxProductoImplements implements ICarritoxProductoInterfaces {
     public void eliminar(int id) {
         cpR.deleteById(id);
     }
+
+    @Override
+    public Double calcularMontoTotal(int idCarrito) {
+        return cpR.calcularMontoTotal(idCarrito);
+    }
+
+
 }
