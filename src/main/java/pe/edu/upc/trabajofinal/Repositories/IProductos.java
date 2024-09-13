@@ -22,5 +22,5 @@ public interface IProductos extends JpaRepository<Productos,Integer> {
             "JOIN productos p ON r.id_producto = p.id_producto \n" +
             "WHERE p.nombre_producto  = 'dulcesss';" ,nativeQuery = true)
 
-    List<String[]> ObtenerReseñasProducto(@Param("nombreProducto") String nombreProducto);
+    List<String[]> ObtenerResenasProducto(@Param("nombreProducto") String nombreProducto);
 }

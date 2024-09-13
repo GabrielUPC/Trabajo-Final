@@ -44,7 +44,7 @@ public class ProductosImplements implements ProductosInterfaces {
 
     @Override
     public List<String[]> ObtenerResenasProducto(String nombreProducto) {
-        return pR.ObtenerReseñasProducto(nombreProducto);
+        return pR.ObtenerResenasProducto(nombreProducto);
     }
 
 

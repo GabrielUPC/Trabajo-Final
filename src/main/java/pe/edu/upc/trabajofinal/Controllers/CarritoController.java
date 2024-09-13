@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Carrito;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ICarritoInterface;
 import pe.edu.upc.trabajofinal.dtos.CarritoDTO;
+import pe.edu.upc.trabajofinal.dtos.GastoUsuarioFechaDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,5 +45,18 @@ public class CarritoController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Integer id){
         cI.eliminar(id);
+    }
+
+    @GetMapping("/gastousuariomes")
+    public List<GastoUsuarioFechaDTO> gastousuariomes(){
+        List<String[]>lista=cI.gastototalusuariopormesService();
+        List<GastoUsuarioFechaDTO> dtos=new ArrayList<>();
+        for(String[] columna:lista) {
+            GastoUsuarioFechaDTO dto=new GastoUsuarioFechaDTO();
+            dto.setIdUsuario(Integer.parseInt(columna[0]));
+            dto.setPrecioTotalCarrito(Double.parseDouble(columna[1]));
+            dtos.add(dto);
+        }
+        return dtos;
     }
 }

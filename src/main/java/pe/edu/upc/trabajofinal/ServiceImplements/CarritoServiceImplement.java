@@ -39,4 +39,9 @@ public class CarritoServiceImplement implements ICarritoInterface {
     public void eliminar(int id) {
     cR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> gastototalusuariopormesService() {
+        return cR.gastototalusuariopormes();
+    }
 }

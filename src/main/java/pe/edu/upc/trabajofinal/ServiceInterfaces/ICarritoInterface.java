@@ -10,4 +10,5 @@ public interface ICarritoInterface { public List<Carrito> list();
     public Carrito listId(int id);
     public void modificar(Carrito carrito);
     public void eliminar(int id);
+    public List<String[]> gastototalusuariopormesService();
 }
