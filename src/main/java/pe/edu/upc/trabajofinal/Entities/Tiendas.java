@@ -2,7 +2,7 @@ package pe.edu.upc.trabajofinal.Entities;
 import jakarta.persistence.*;
 
 @Entity
-
+@Table(name="Tiendas")
 public class Tiendas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

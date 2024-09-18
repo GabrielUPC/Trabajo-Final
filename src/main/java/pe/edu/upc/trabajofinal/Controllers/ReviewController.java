@@ -3,6 +3,7 @@ package pe.edu.upc.trabajofinal.Controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Review;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class ReviewController {
     @Autowired
     private IReviewServicesInterfaces rS;
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @GetMapping
     private List<ReviewDTO> list(){
         return rS.list().stream().map(x->{
@@ -29,28 +31,33 @@ public class ReviewController {
             return m.map(x, ReviewDTO.class);
         }).collect(Collectors.toList());
     }
+    @PreAuthorize("hasAuthority('COMPRADOR')")
     @PostMapping
     private void save(@RequestBody ReviewDTO dto){
         ModelMapper m=new ModelMapper();
         Review r=m.map(dto, Review.class);
         rS.add(r);
     }
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     private ReviewDTO findById(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         ReviewDTO r=m.map(rS.listId(id), ReviewDTO.class);
         return r;
     }
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @PutMapping
     private void update(@RequestBody ReviewDTO dto){
         ModelMapper m=new ModelMapper();
         Review r=m.map(dto, Review.class);
         rS.modificar(r);
     }
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @DeleteMapping("{id}")
     private void deletebyid(@PathVariable("id") Integer id){
         rS.eliminar(id);
     }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping("/reviewProductos")
     public List<ReviewProductosDTO> ReviewdeProductos(@RequestParam Integer id){
         List<String[]> lista=rS.mostrarReviewProoductos(id);

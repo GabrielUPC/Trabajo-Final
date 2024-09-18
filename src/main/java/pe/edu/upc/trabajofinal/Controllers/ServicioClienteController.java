@@ -2,6 +2,7 @@ package pe.edu.upc.trabajofinal.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/servicios")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class ServicioClienteController {
     @Autowired
     private IServicioClienteInterfaces Isc;
+
     @GetMapping
     private List<ServicioClienteDTO> listar(){
         return Isc.list().stream().map(x->{
@@ -32,6 +35,7 @@ public class ServicioClienteController {
         ServicioCliente Sc=m.map(sc, ServicioCliente.class);
         Isc.insert(Sc);
     }
+
     @GetMapping("/{id}")
     public ServicioClienteDTO listarId(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();

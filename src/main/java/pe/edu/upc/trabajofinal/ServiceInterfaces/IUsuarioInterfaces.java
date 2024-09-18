@@ -1,5 +1,6 @@
 package pe.edu.upc.trabajofinal.ServiceInterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.trabajofinal.Entities.Usuario;
 import java.util.List;
 
@@ -12,5 +13,6 @@ public interface IUsuarioInterfaces {
     public void modificar(Usuario usuario);
     public void eliminar(int id);
     List<String[]> UsuarioReclamo();
+
 
 }

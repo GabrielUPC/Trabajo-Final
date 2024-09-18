@@ -2,6 +2,7 @@ package pe.edu.upc.trabajofinal.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Productos;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ProductosInterfaces;
@@ -16,39 +17,46 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/productos")
+
 public class ProductosController {
     @Autowired
     private ProductosInterfaces Ip;
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     private List<ProductosDTO> listar(){
         return Ip.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
             return m.map(x, ProductosDTO.class);
         }).collect(Collectors.toList());
     }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
     @PostMapping
     private void insertar(@RequestBody ProductosDTO dto){
         ModelMapper m=new ModelMapper();
         Productos p = m.map(dto, Productos.class);
         Ip.add(p);
     }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping("/{id}")
     private ProductosDTO buscar(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         ProductosDTO dto=m.map(Ip.listid(id), ProductosDTO.class);
         return dto;
     }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
     @PutMapping
     private void modificar(@RequestBody ProductosDTO dto){
         ModelMapper m=new ModelMapper();
         Productos p=m.map(dto, Productos.class);
         Ip.modificar(p);
     }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
     @DeleteMapping("/{id}")
     private void eliminar(@PathVariable("id") Integer id)
     {
         Ip.eliminar(id);
     }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping("/ProductosEnOferta")
     private List<ProductoEnOfeta> ProductoEnOfeta()
     {
@@ -66,7 +74,7 @@ public class ProductosController {
         }
         return listaDTO;
     }
-
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping("/obtenerreseñasporProducto")
     public List<ReviewDTO> ObtenerResenasProducto(@RequestParam String nombreProducto) {
         List<String[]>lista = Ip.ObtenerResenasProducto(nombreProducto);

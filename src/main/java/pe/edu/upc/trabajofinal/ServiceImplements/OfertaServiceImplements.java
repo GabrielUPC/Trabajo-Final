@@ -22,7 +22,6 @@ public class OfertaServiceImplements implements IOfertaInterface {
     @Override
     public void add(Oferta oferta) {
         oR.save(oferta);
-
     }
 
     @Override
@@ -31,14 +30,10 @@ public class OfertaServiceImplements implements IOfertaInterface {
     }
 
     @Override
-    public void modificar(Oferta oferta){oR.save(oferta);
-
-    }
+    public void modificar(Oferta oferta){oR.save(oferta);   }
 
     @Override
-    public void eliminar(int id) {oR.deleteById(id);
-
-    }
+    public void eliminar(int id) {oR.deleteById(id);    }
 
     @Override
     public List<String[]> ofertasactivas() {

@@ -12,6 +12,9 @@ import java.util.List;
 public class UsuarioServicesImplements implements IUsuarioInterfaces {
     @Autowired
     private IUsuarioRepository usuarioRepository;
+
+
+
     @Override
     public List<Usuario> list(){
         return usuarioRepository.findAll();
@@ -41,6 +44,5 @@ public class UsuarioServicesImplements implements IUsuarioInterfaces {
     public List<String[]> UsuarioReclamo() {
         return usuarioRepository.UsuarioReclamo();
     }
-
 
 }

@@ -2,6 +2,7 @@ package pe.edu.upc.trabajofinal.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Roles;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IRolesInterfaces;
@@ -10,7 +11,7 @@ import pe.edu.upc.trabajofinal.dtos.UsuarioDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@PreAuthorize("hasAuthority('ADMIN')")
 @RestController
 @RequestMapping("/Roles")
 public class RolesController {

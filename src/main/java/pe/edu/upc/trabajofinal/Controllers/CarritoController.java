@@ -2,6 +2,7 @@ package pe.edu.upc.trabajofinal.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Carrito;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ICarritoInterface;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class CarritoController {
     @Autowired
     private ICarritoInterface cI;
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public List<CarritoDTO> listar() {
         return cI.list().stream().map(x -> {
@@ -24,29 +26,34 @@ public class CarritoController {
             return m.map(x, CarritoDTO.class);
         }).collect(Collectors.toList());
     }
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @PostMapping
     public void add(@RequestBody CarritoDTO dto){
         ModelMapper m=new ModelMapper();
         Carrito c=m.map(dto, Carrito.class);
         cI.add(c);
     }
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public CarritoDTO listarId(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         CarritoDTO c=m.map(cI.listId(id), CarritoDTO.class);
         return c;
     }
+
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @PutMapping
     public void modificar(@RequestBody CarritoDTO dto){
         ModelMapper m=new ModelMapper();
         Carrito c=m.map(dto, Carrito.class);
         cI.modificar(c);
     }
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Integer id){
         cI.eliminar(id);
     }
-
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @GetMapping("/gastousuariomes")
     public List<GastoUsuarioFechaDTO> gastousuariomes(){
         List<String[]>lista=cI.gastototalusuariopormesService();

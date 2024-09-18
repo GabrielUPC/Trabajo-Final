@@ -1,6 +1,9 @@
 package pe.edu.upc.trabajofinal.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
@@ -20,27 +23,23 @@ public class Usuario {
     private String telefono;
     @Column(name = "password", nullable = false, length =300)
     private String password;
+    private Boolean enabled;
     @Column(name = "username", nullable = false, length =30)
     private String username;
-    public Usuario() {}
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idUsuario")//- creo que no deberia ir esto en usuario
+    private List<Roles> roles;
 
-    public Usuario(int idUsuario,int dni, String nombre, String direccion, String correo, String telefono, String password, String username) {
-        this.idUsuario = idUsuario;
-        this.dni=dni;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.correo = correo;
-        this.telefono = telefono;
-        this.password = password;
-        this.username = username;
-    }
 
-    public int getId() {
+
+
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setId(int id) {
-        this.idUsuario = id;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public int getDni() {
@@ -91,11 +90,27 @@ public class Usuario {
         this.password = password;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
     }
 }
