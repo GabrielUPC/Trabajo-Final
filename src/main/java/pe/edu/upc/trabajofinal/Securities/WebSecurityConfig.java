@@ -33,7 +33,7 @@ public class WebSecurityConfig {
     private UserDetailsService jwtUserDetailsService;
 
     @Autowired
-    private JwtRequestFilter  jwtRequestFilter;
+    private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
     @Qualifier("handlerExceptionResolver")
@@ -56,17 +56,25 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        //Desde Spring Boot 3.1+
+        // Permitir acceso a Swagger y a la ruta de login sin autenticación
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers(antMatcher("/login")).permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(
+                                "/swagger-ui/**",     // Permitir acceso a Swagger UI
+                                "/v3/api-docs/**",    // Permitir acceso a OpenAPI docs
+                                "/swagger-resources/**", // Permitir acceso a recursos de Swagger
+                                "/webjars/**",        // Permitir acceso a recursos de Webjars
+                                "/login"              // Permitir acceso a la ruta de login
+                        ).permitAll()
+                        .anyRequest().authenticated() // Proteger todas las demás rutas
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractHttpConfigurer::disable)
                 .exceptionHandling(e -> e.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(Customizer.withDefaults());
+
+        // Añadir el filtro de JWT antes del filtro de autenticación por defecto
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
