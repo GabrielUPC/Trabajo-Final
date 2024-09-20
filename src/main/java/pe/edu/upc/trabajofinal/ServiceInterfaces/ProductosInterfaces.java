@@ -10,6 +10,8 @@ public interface ProductosInterfaces {
     public void eliminar(int id);
     public void modificar(Productos producto);
     public Productos listid(int id);
-    List<String[]> ProductoEnOfeta();
+    List<String[]> ProductoVencidos();
     List<String[]> ObtenerResenasProducto(String nombreProducto);
+    List<String[]> GananciaTotalPorTienda();
+
 }

@@ -6,7 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Productos;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ProductosInterfaces;
-import pe.edu.upc.trabajofinal.dtos.ProductoEnOfeta;
+import pe.edu.upc.trabajofinal.dtos.GananciaTotalPorTiendaDTO;
 import pe.edu.upc.trabajofinal.dtos.ProductosDTO;
 import pe.edu.upc.trabajofinal.dtos.ReviewDTO;
 
@@ -57,19 +57,15 @@ public class ProductosController {
         Ip.eliminar(id);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
-    @GetMapping("/ProductosEnOferta")
-    private List<ProductoEnOfeta> ProductoEnOfeta()
+    @GetMapping("/ProductosVencido")
+        private List<ProductosDTO> ProductoVencido()
     {
-        List<String[]>lista =Ip.ProductoEnOfeta();
-        List<ProductoEnOfeta> listaDTO = new ArrayList<>();
+        List<String[]>lista =Ip.ProductoVencidos();
+        List<ProductosDTO> listaDTO = new ArrayList<>();
         for (String[] columna : lista)
         {
-            ProductoEnOfeta dto = new ProductoEnOfeta();
-            dto.setProducto(columna[0]);
-            dto.setNombreOfeta(columna[1]);
-            dto.setFechaInicial(LocalDate.parse(columna[2]));
-            dto.setFechaFinal(LocalDate.parse(columna[3]));
-            dto.setCantidadProducto(Integer.parseInt(columna[4]));
+            ProductosDTO dto = new ProductosDTO();
+            dto.setNombreProducto(columna[0]);
             listaDTO.add(dto);
         }
         return listaDTO;
@@ -88,5 +84,19 @@ public class ProductosController {
             listaDTO.add(dto);
         }
          return listaDTO;
+    }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
+    @GetMapping("/GananciasPorTiendas")
+    public  List<GananciaTotalPorTiendaDTO> GananciasPorTiendas(){
+        List<String[]>lista = Ip.GananciaTotalPorTienda();
+        List<GananciaTotalPorTiendaDTO>listaDTO= new ArrayList<>();
+        for (String[]columna : lista)
+        {
+            GananciaTotalPorTiendaDTO dto= new GananciaTotalPorTiendaDTO();
+            dto.setTienda(columna[0]);
+            dto.setGananciaTotal(Double.parseDouble(columna[1]));
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 }
