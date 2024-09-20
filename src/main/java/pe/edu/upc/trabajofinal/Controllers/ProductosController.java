@@ -6,9 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Productos;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ProductosInterfaces;
-import pe.edu.upc.trabajofinal.dtos.GananciaTotalPorTiendaDTO;
-import pe.edu.upc.trabajofinal.dtos.ProductosDTO;
-import pe.edu.upc.trabajofinal.dtos.ReviewDTO;
+import pe.edu.upc.trabajofinal.dtos.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -98,5 +96,18 @@ public class ProductosController {
             listaDTO.add(dto);
         }
         return listaDTO;
+    }
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
+    @GetMapping("/TotalStock")
+    public List<TotalStockDTO> TotalStockProductos(){
+        List<String[]>lista=Ip.TotalStockProductos();
+        List<TotalStockDTO> dtos=new ArrayList<>();
+        for(String[] columna:lista) {
+            TotalStockDTO dto=new TotalStockDTO();
+            dto.setTotalProductosEnStock(Integer.parseInt(columna[0]));
+
+            dtos.add(dto);
+        }
+        return dtos;
     }
 }

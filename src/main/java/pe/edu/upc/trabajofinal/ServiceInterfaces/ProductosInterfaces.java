@@ -13,5 +13,6 @@ public interface ProductosInterfaces {
     List<String[]> ProductoVencidos();
     List<String[]> ObtenerResenasProducto(String nombreProducto);
     List<String[]> GananciaTotalPorTienda();
+    List<String[]> TotalStockProductos();
 
 }

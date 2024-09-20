@@ -28,4 +28,9 @@ public interface IProductos extends JpaRepository<Productos,Integer> {
             "join carritox_producto c on p.id_producto = c.id_producto\n" +
             "group by t.nombre", nativeQuery = true)
     List<String[]> GananciaTotalPorTienda();
+
+    @Query(value = "SELECT COUNT(*) AS totalProductosEnStock\n" +
+            "FROM productos\n" +
+            "WHERE stock_producto>0;",nativeQuery = true)
+    List<String[]> TotalStockProductos();
 }

@@ -52,5 +52,10 @@ public class ProductosImplements implements ProductosInterfaces {
         return pR.GananciaTotalPorTienda();
     }
 
+    @Override
+    public List<String[]> TotalStockProductos() {
+        return pR.TotalStockProductos();
+    }
+
 
 }
