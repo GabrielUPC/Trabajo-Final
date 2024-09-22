@@ -6,9 +6,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Productos;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ProductosInterfaces;
-import pe.edu.upc.trabajofinal.dtos.ProductoEnOfeta;
+import pe.edu.upc.trabajofinal.dtos.GananciaTotalPorTiendaDTO;
 import pe.edu.upc.trabajofinal.dtos.ProductosDTO;
 import pe.edu.upc.trabajofinal.dtos.ReviewDTO;
+import pe.edu.upc.trabajofinal.dtos.TotalStockDTO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ProductosController {
     private ProductosInterfaces Ip;
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
-    private List<ProductosDTO> listar(){
+    public List<ProductosDTO> listar(){
         return Ip.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
             return m.map(x, ProductosDTO.class);
@@ -31,48 +32,71 @@ public class ProductosController {
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
     @PostMapping
-    private void insertar(@RequestBody ProductosDTO dto){
+    public void insertar(@RequestBody ProductosDTO dto){
         ModelMapper m=new ModelMapper();
         Productos p = m.map(dto, Productos.class);
         Ip.add(p);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping("/{id}")
-    private ProductosDTO buscar(@PathVariable("id") Integer id){
+    public ProductosDTO buscar(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         ProductosDTO dto=m.map(Ip.listid(id), ProductosDTO.class);
         return dto;
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
     @PutMapping
-    private void modificar(@RequestBody ProductosDTO dto){
+    public void modificar(@RequestBody ProductosDTO dto){
         ModelMapper m=new ModelMapper();
         Productos p=m.map(dto, Productos.class);
         Ip.modificar(p);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
     @DeleteMapping("/{id}")
-    private void eliminar(@PathVariable("id") Integer id)
+    public void eliminar(@PathVariable("id") Integer id)
     {
         Ip.eliminar(id);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
-    @GetMapping("/ProductosEnOferta")
-    private List<ProductoEnOfeta> ProductoEnOfeta()
+    @GetMapping("/ProductosVencido")
+    public List<ProductosDTO> ProductoVencido()
     {
-        List<String[]>lista =Ip.ProductoEnOfeta();
-        List<ProductoEnOfeta> listaDTO = new ArrayList<>();
+        List<String[]>lista =Ip.ProductoVencidos();
+        List<ProductosDTO> listaDTO = new ArrayList<>();
         for (String[] columna : lista)
         {
-            ProductoEnOfeta dto = new ProductoEnOfeta();
-            dto.setProducto(columna[0]);
-            dto.setNombreOfeta(columna[1]);
-            dto.setFechaInicial(LocalDate.parse(columna[2]));
-            dto.setFechaFinal(LocalDate.parse(columna[3]));
-            dto.setCantidadProducto(Integer.parseInt(columna[4]));
+            ProductosDTO dto = new ProductosDTO();
+            dto.setNombreProducto(columna[0]);
             listaDTO.add(dto);
         }
         return listaDTO;
+    }
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
+    @GetMapping("/GananciasPorTiendas")
+    public  List<GananciaTotalPorTiendaDTO> GananciasPorTiendas(){
+        List<String[]>lista = Ip.GananciaTotalPorTienda();
+        List<GananciaTotalPorTiendaDTO>listaDTO= new ArrayList<>();
+        for (String[]columna : lista)
+        {
+            GananciaTotalPorTiendaDTO dto= new GananciaTotalPorTiendaDTO();
+            dto.setTienda(columna[0]);
+            dto.setGananciaTotal(Double.parseDouble(columna[1]));
+            listaDTO.add(dto);
+        }
+        return listaDTO;
+    }
+    @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
+    @GetMapping("/TotalStock")
+    public List<TotalStockDTO> TotalStockProductos(){
+        List<String[]>lista=Ip.TotalStockProductos();
+        List<TotalStockDTO> dtos=new ArrayList<>();
+        for(String[] columna:lista) {
+            TotalStockDTO dto=new TotalStockDTO();
+            dto.setTotalProductosEnStock(Integer.parseInt(columna[0]));
+
+            dtos.add(dto);
+        }
+        return dtos;
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping("/obtenerreseñasporProducto")
