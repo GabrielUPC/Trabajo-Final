@@ -19,7 +19,7 @@ public class CarritoxProductoController {
     private ICarritoxProductoInterfaces Icp;
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    private List<CarritoxProductoDTO>list() {
+    public List<CarritoxProductoDTO>list() {
         return Icp.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, CarritoxProductoDTO.class);
@@ -27,28 +27,28 @@ public class CarritoxProductoController {
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR')" )
     @PostMapping
-    private void add(@RequestBody CarritoxProductoDTO dto) {
+    public void add(@RequestBody CarritoxProductoDTO dto) {
         ModelMapper m = new ModelMapper();
         CarritoxProducto cp=m.map(dto, CarritoxProducto.class);
         Icp.add(cp);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR')" )
     @PutMapping
-    private void modificar(@RequestBody CarritoxProductoDTO dto) {
+    public void modificar(@RequestBody CarritoxProductoDTO dto) {
         ModelMapper m = new ModelMapper();
         CarritoxProducto cp=m.map(dto, CarritoxProducto.class);
         Icp.modificar(cp);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR')" )
     @GetMapping("{id}")
-    private CarritoxProductoDTO Listbyid(@PathVariable("id") Integer id) {
+    public CarritoxProductoDTO Listbyid(@PathVariable("id") Integer id) {
         ModelMapper m = new ModelMapper();
         CarritoxProductoDTO cp=m.map(Icp.findById(id), CarritoxProductoDTO.class);
         return cp;
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR')" )
     @DeleteMapping("{id}")
-    private void eliminar(@PathVariable("id") Integer id) {
+    public void eliminar(@PathVariable("id") Integer id) {
         Icp.eliminar(id);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR')" )

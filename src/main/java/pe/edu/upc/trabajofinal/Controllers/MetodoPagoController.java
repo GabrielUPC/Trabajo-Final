@@ -2,16 +2,16 @@ package pe.edu.upc.trabajofinal.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.MetodoPago;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IMetodoPagoInterface;
 import pe.edu.upc.trabajofinal.dtos.MetodoPagoDTO;
-import pe.edu.upc.trabajofinal.dtos.OfertaDTO;
+
 
 import java.util.List;
-import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @RestController
@@ -20,7 +20,7 @@ public class MetodoPagoController {
 
     @Autowired
     private IMetodoPagoInterface mP;
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     // Crear un nuevo método de pago
     @PostMapping
     public void insertar(@RequestBody MetodoPagoDTO dto){
@@ -28,7 +28,7 @@ public class MetodoPagoController {
         MetodoPago mp=m.map(dto,MetodoPago.class);
         mP.save(mp);
     }
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping()
     public List<MetodoPagoDTO> list() {
         return mP.list().stream().map(x -> {

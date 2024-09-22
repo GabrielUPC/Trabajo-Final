@@ -26,28 +26,28 @@ public class ReclamosController {
     }
     @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @PostMapping
-    private void insertar(@RequestBody ReclamosDTO dto){
+    public void insertar(@RequestBody ReclamosDTO dto){
         ModelMapper m=new ModelMapper();
         Reclamos r = m.map(dto, Reclamos.class);
         rI.add(r);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR')")
     @GetMapping("/{id}")
-    private ReclamosDTO listarporid(@PathVariable("id") Integer id){
+    public ReclamosDTO listarporid(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         ReclamosDTO dto=m.map(rI.listId(id), ReclamosDTO.class);
         return dto;
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR')")
     @PutMapping
-    private void modificar(@RequestBody ReclamosDTO dto){
+    public void modificar(@RequestBody ReclamosDTO dto){
         ModelMapper m=new ModelMapper();
         Reclamos r=m.map(dto, Reclamos.class);
         rI.modificar(r);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR')")
     @DeleteMapping("/{id}")
-    private void eliminar(@PathVariable("id") Integer id)
+    public void eliminar(@PathVariable("id") Integer id)
     {
         rI.eliminar(id);
     }

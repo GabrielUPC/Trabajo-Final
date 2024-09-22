@@ -10,7 +10,6 @@ import pe.edu.upc.trabajofinal.Entities.Usuario;
 import java.util.List;
 
 @Repository
-
 public interface ITiendaRepository extends JpaRepository<Tiendas, Integer> {
     @Query("select t from Tiendas t where t.nombre like %:nombre%")
     public List<Tiendas> Buscar(@Param("nombre") String nombre);

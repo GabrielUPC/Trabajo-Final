@@ -11,6 +11,8 @@ import java.util.List;
 public class NotificacioneImplements implements INotificacionesInterfaces {
     @Autowired
     private INotificaciones nR;
+
+
     @Override
     public List<Notificaciones> list() {
         return nR.findAll();

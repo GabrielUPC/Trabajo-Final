@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/Carrito")
 public class CarritoController {
     @Autowired
-    private ICarritoInterface cI;
+    public ICarritoInterface cI;
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public List<CarritoDTO> listar() {

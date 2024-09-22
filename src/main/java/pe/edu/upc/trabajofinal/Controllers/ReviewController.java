@@ -25,7 +25,7 @@ public class ReviewController {
     private IReviewServicesInterfaces rS;
     @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @GetMapping
-    private List<ReviewDTO> list(){
+    public List<ReviewDTO> list(){
         return rS.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
             return m.map(x, ReviewDTO.class);
@@ -33,28 +33,28 @@ public class ReviewController {
     }
     @PreAuthorize("hasAuthority('COMPRADOR')")
     @PostMapping
-    private void save(@RequestBody ReviewDTO dto){
+    public void save(@RequestBody ReviewDTO dto){
         ModelMapper m=new ModelMapper();
         Review r=m.map(dto, Review.class);
         rS.add(r);
     }
     @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @GetMapping("/{id}")
-    private ReviewDTO findById(@PathVariable("id") Integer id){
+    public ReviewDTO findById(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         ReviewDTO r=m.map(rS.listId(id), ReviewDTO.class);
         return r;
     }
     @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @PutMapping
-    private void update(@RequestBody ReviewDTO dto){
+    public void update(@RequestBody ReviewDTO dto){
         ModelMapper m=new ModelMapper();
         Review r=m.map(dto, Review.class);
         rS.modificar(r);
     }
     @PreAuthorize("hasAuthority('COMPRADOR') or hasAuthority('ADMIN')")
     @DeleteMapping("{id}")
-    private void deletebyid(@PathVariable("id") Integer id){
+    public void deletebyid(@PathVariable("id") Integer id){
         rS.eliminar(id);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")

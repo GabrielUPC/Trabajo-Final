@@ -1,6 +1,6 @@
 package pe.edu.upc.trabajofinal.dtos;
 
-import jakarta.persistence.*;
+
 import pe.edu.upc.trabajofinal.Entities.Usuario;
 
 import java.time.LocalDate;

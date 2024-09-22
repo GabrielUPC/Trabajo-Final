@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR')")
 public class PedidoController {
     @Autowired
-    private IPedidoInterface pI;
+    public IPedidoInterface pI;
 
     @GetMapping
-    private List<PedidoDTO> listar(){
+    public List<PedidoDTO> listar(){
         return pI.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
             return m.map(x, PedidoDTO.class);

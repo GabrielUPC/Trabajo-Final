@@ -8,12 +8,9 @@ import pe.edu.upc.trabajofinal.ServiceInterfaces.IUsuarioInterfaces;
 
 import java.util.List;
 @Service
-
 public class UsuarioServicesImplements implements IUsuarioInterfaces {
     @Autowired
     private IUsuarioRepository usuarioRepository;
-
-
 
     @Override
     public List<Usuario> list(){

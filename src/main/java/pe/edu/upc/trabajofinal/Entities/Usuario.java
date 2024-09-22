@@ -11,7 +11,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
-    @Column(name="dni", nullable=false,length = 8)
+    @Column(name="dni", nullable=false)
     private int dni;
     @Column(name = "nombre",nullable = false,length = 10)
     private String nombre;
@@ -27,12 +27,24 @@ public class Usuario {
     @Column(name = "username", nullable = false, length =30)
     private String username;
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idUsuario")//- creo que no deberia ir esto en usuario
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy ="u")
     private List<Roles> roles;
 
+    public Usuario() {
+    }
 
-
+    public Usuario(int idUsuario, int dni, String nombre, String direccion, String correo, String telefono, String password, Boolean enabled, String username, List<Roles> roles) {
+        this.idUsuario = idUsuario;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.password = password;
+        this.enabled = enabled;
+        this.username = username;
+        this.roles = roles;
+    }
 
     public int getIdUsuario() {
         return idUsuario;

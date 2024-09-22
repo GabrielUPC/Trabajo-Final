@@ -4,13 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import pe.edu.upc.trabajofinal.Entities.Tiendas;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ITiendaInterfaces;
-import pe.edu.upc.trabajofinal.ServiceInterfaces.IUsuarioInterfaces;
 import pe.edu.upc.trabajofinal.dtos.TiendaDTO;
-
-
 import java.util.List;
 import java.util.stream.Collectors;
 

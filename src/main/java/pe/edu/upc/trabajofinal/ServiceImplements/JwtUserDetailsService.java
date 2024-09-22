@@ -7,12 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pe.edu.upc.trabajofinal.Entities.Usuario;
 import pe.edu.upc.trabajofinal.Repositories.IUsuarioRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-@Component
+@Service
 public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
     private IUsuarioRepository repo;

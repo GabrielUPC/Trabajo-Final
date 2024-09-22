@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajofinal.Entities.Usuario;
 import pe.edu.upc.trabajofinal.dtos.UsuarioDTO;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IUsuarioInterfaces;
+import pe.edu.upc.trabajofinal.dtos.UsuarioListDTO;
 import pe.edu.upc.trabajofinal.dtos.UsuarioReclamoDTO;
 
 import java.time.LocalDate;
@@ -25,10 +26,10 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    public List<UsuarioDTO> listar(){
+    public List<UsuarioListDTO> listar(){
         return uService.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
-            return m.map(x,UsuarioDTO.class);
+            return m.map(x,UsuarioListDTO.class);
         }).collect(Collectors.toList());
     }
     @PreAuthorize("hasAuthority('ADMIN')")

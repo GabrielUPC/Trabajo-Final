@@ -1,9 +1,10 @@
 package pe.edu.upc.trabajofinal.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import pe.edu.upc.trabajofinal.Entities.Roles;
+
+import java.util.List;
 
 public class UsuarioDTO {
 
@@ -21,14 +22,18 @@ public class UsuarioDTO {
 
     private String password;
 
+    private Boolean enabled;
+
     private String username;
 
-    public int getId() {
+
+
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setId(int id) {
-        this.idUsuario = id;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public int getDni() {
@@ -79,6 +84,14 @@ public class UsuarioDTO {
         this.password = password;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -86,4 +99,6 @@ public class UsuarioDTO {
     public void setUsername(String username) {
         this.username = username;
     }
+
+
 }

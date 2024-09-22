@@ -16,8 +16,6 @@ import pe.edu.upc.trabajofinal.Securities.JwtResponse;
 import pe.edu.upc.trabajofinal.Securities.JwtTokenUtil;
 import pe.edu.upc.trabajofinal.ServiceImplements.JwtUserDetailsService;
 
-
-//Clase 3
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {

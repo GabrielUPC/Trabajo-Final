@@ -3,6 +3,7 @@ package pe.edu.upc.trabajofinal.Entities;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name="MetodoPago")
 public class MetodoPago {
 
     @Id

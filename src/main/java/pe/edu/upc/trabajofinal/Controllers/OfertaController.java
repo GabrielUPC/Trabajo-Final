@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/ofertas")
 public class OfertaController {
     @Autowired
-    private IOfertaInterface Oi;
+    public IOfertaInterface Oi;
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping
     public List<OfertaDTO> listar() {

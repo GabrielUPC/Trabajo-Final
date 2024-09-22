@@ -23,7 +23,7 @@ public class ProductosController {
     private ProductosInterfaces Ip;
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
-    private List<ProductosDTO> listar(){
+    public List<ProductosDTO> listar(){
         return Ip.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
             return m.map(x, ProductosDTO.class);
@@ -31,34 +31,34 @@ public class ProductosController {
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
     @PostMapping
-    private void insertar(@RequestBody ProductosDTO dto){
+    public void insertar(@RequestBody ProductosDTO dto){
         ModelMapper m=new ModelMapper();
         Productos p = m.map(dto, Productos.class);
         Ip.add(p);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping("/{id}")
-    private ProductosDTO buscar(@PathVariable("id") Integer id){
+    public ProductosDTO buscar(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         ProductosDTO dto=m.map(Ip.listid(id), ProductosDTO.class);
         return dto;
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
     @PutMapping
-    private void modificar(@RequestBody ProductosDTO dto){
+    public void modificar(@RequestBody ProductosDTO dto){
         ModelMapper m=new ModelMapper();
         Productos p=m.map(dto, Productos.class);
         Ip.modificar(p);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
     @DeleteMapping("/{id}")
-    private void eliminar(@PathVariable("id") Integer id)
+    public void eliminar(@PathVariable("id") Integer id)
     {
         Ip.eliminar(id);
     }
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping("/ProductosEnOferta")
-    private List<ProductoEnOfeta> ProductoEnOfeta()
+    public List<ProductoEnOfeta> ProductoEnOfeta()
     {
         List<String[]>lista =Ip.ProductoEnOfeta();
         List<ProductoEnOfeta> listaDTO = new ArrayList<>();
