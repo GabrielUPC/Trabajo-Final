@@ -10,11 +10,10 @@ import java.util.List;
 
 @Repository
 public interface IProductos extends JpaRepository<Productos,Integer> {
-    @Query(value ="select p.nombre_producto as Producto, o.nombre_oferta, o.fecha_inicio, o.fecha_fin, o.cantidad_productos\n" +
-            "from productos p\n" +
-            "join oferta o on p.id_ofertas = o.id_oferta \n" +
-            "where o.fecha_fin >= current_date" ,nativeQuery = true )
-    List<String[]> ProductoEnOfeta();
+    @Query(value ="select p.nombre_producto as \"Productos Vencidos\"\n" +
+            "            from productos p\n" +
+            "            where p.fecha_vencimiento_producto < current_date" ,nativeQuery = true )
+    List<String[]> ProductoVencidos();
 
 
     @Query(value ="SELECT r.calificacion, r.comentarios, r.fecha \n" +
@@ -23,4 +22,15 @@ public interface IProductos extends JpaRepository<Productos,Integer> {
             "WHERE p.nombre_producto  = 'dulcesss';" ,nativeQuery = true)
 
     List<String[]> ObtenerResenasProducto(@Param("nombreProducto") String nombreProducto);
+    @Query(value = "select t.nombre as \"Tienda\", Sum(p.precio_producto*c.cantidad) as \"Ganancia Total\"\n" +
+            "from productos p\n" +
+            "join tiendas t on p.id_tiendas = t.id_tiendas\n" +
+            "join carritox_producto c on p.id_producto = c.id_producto\n" +
+            "group by t.nombre", nativeQuery = true)
+    List<String[]> GananciaTotalPorTienda();
+
+    @Query(value = "SELECT COUNT(*) AS totalProductosEnStock\n" +
+            "FROM productos\n" +
+            "WHERE stock_producto>0;",nativeQuery = true)
+    List<String[]> TotalStockProductos();
 }

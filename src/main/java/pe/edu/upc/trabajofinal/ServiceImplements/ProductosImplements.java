@@ -37,8 +37,8 @@ public class ProductosImplements implements ProductosInterfaces {
     }
 
     @Override
-    public List<String[]> ProductoEnOfeta() {
-        return pR.ProductoEnOfeta();
+    public List<String[]> ProductoVencidos() {
+        return pR.ProductoVencidos();
     }
 
 
@@ -47,6 +47,15 @@ public class ProductosImplements implements ProductosInterfaces {
         return pR.ObtenerResenasProducto(nombreProducto);
     }
 
+    @Override
+    public List<String[]> GananciaTotalPorTienda() {
+        return pR.GananciaTotalPorTienda();
+    }
+
+    @Override
+    public List<String[]> TotalStockProductos() {
+        return pR.TotalStockProductos();
+    }
 
 
 }
