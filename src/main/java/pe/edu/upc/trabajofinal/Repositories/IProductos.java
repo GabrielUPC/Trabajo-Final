@@ -16,12 +16,7 @@ public interface IProductos extends JpaRepository<Productos,Integer> {
     List<String[]> ProductoVencidos();
 
 
-    @Query(value ="SELECT r.calificacion, r.comentarios, r.fecha \n" +
-            "FROM review r \n" +
-            "JOIN productos p ON r.id_producto = p.id_producto \n" +
-            "WHERE p.nombre_producto  = 'dulcesss';" ,nativeQuery = true)
-
-    List<String[]> ObtenerResenasProducto(@Param("nombreProducto") String nombreProducto);
+    
     @Query(value = "select t.nombre as \"Tienda\", Sum(p.precio_producto*c.cantidad) as \"Ganancia Total\"\n" +
             "from productos p\n" +
             "join tiendas t on p.id_tiendas = t.id_tiendas\n" +
@@ -29,8 +24,14 @@ public interface IProductos extends JpaRepository<Productos,Integer> {
             "group by t.nombre", nativeQuery = true)
     List<String[]> GananciaTotalPorTienda();
 
-    @Query(value = "SELECT COUNT(*) AS totalProductosEnStock\n" +
-            "FROM productos\n" +
-            "WHERE stock_producto>0;",nativeQuery = true)
-    List<String[]> TotalStockProductos();
+    @Query(value = "select nombre_producto,stock_producto from productos po \n" +
+            "where po.stock_producto<10;",nativeQuery = true)
+    List<String[]> ProductosConMenorStock();
+    @Query(value = "select po.nombre_producto , count(ca.id_carritoxproducto) from pedido pe\n" +
+            "join carritox_producto ca on ca.id_carritoxproducto=pe.id_carritoxproducto\n" +
+            "join productos po on po.id_producto=ca.id_producto\n" +
+            "where po.id_usuario=:usuarioId\n" +
+            "GROUP BY po.nombre_producto",nativeQuery = true)
+    public List<String[]> productosmasvendidos(@Param("usuarioId") int usuarioId);
+
 }

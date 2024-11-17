@@ -1,12 +1,13 @@
 package pe.edu.upc.trabajofinal.dtos;
 
 import jakarta.persistence.Column;
+import pe.edu.upc.trabajofinal.Entities.Usuario;
 
 import java.time.LocalDate;
 
 public class OfertaDTO {
 
-    private Integer idOferta;
+    private int idOferta;
 
     private String nombreOferta;
 
@@ -14,13 +15,15 @@ public class OfertaDTO {
 
     private LocalDate fechaFin;
 
-    private int CantidadProductos;
+    private int cantidad;
 
-    public Integer getIdOferta() {
+    private Usuario u;
+
+    public int getIdOferta() {
         return idOferta;
     }
 
-    public void setIdOferta(Integer idOferta) {
+    public void setIdOferta(int idOferta) {
         this.idOferta = idOferta;
     }
 
@@ -48,11 +51,19 @@ public class OfertaDTO {
         this.fechaFin = fechaFin;
     }
 
-    public int getCantidadProductos() {
-        return CantidadProductos;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setCantidadProductos(int cantidadProductos) {
-        CantidadProductos = cantidadProductos;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Usuario getU() {
+        return u;
+    }
+
+    public void setU(Usuario u) {
+        this.u = u;
     }
 }

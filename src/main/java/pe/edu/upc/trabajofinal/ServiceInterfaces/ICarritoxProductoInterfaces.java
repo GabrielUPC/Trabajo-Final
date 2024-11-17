@@ -1,5 +1,6 @@
 package pe.edu.upc.trabajofinal.ServiceInterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.trabajofinal.Entities.CarritoxProducto;
 
 import java.util.List;
@@ -10,5 +11,5 @@ public interface ICarritoxProductoInterfaces {
     public void add(CarritoxProducto producto);
     public void modificar(CarritoxProducto producto);
     public void eliminar(int id);
-    Double calcularMontoTotal(int idCarrito);
+    public List<String[]> findCarritosUsuarioId(int usuarioId);
 }

@@ -1,10 +1,7 @@
 package pe.edu.upc.trabajofinal.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import pe.edu.upc.trabajofinal.Entities.Carrito;
-import pe.edu.upc.trabajofinal.Entities.Productos;
+import pe.edu.upc.trabajofinal.Entities.CarritoxProducto;
+import pe.edu.upc.trabajofinal.Entities.Usuario;
 
 import java.time.LocalDate;
 
@@ -13,8 +10,8 @@ public class PedidoDTO {
     private LocalDate fechacPedido;
     private LocalDate fechaEntrega;
     private String estado;
-    private Carrito c;
-    private Productos p;
+    private CarritoxProducto carritoxProducto;
+
 
     public int getIdPedido() {
         return idPedido;
@@ -48,19 +45,11 @@ public class PedidoDTO {
         this.estado = estado;
     }
 
-    public Carrito getC() {
-        return c;
+    public CarritoxProducto getCarritoxProducto() {
+        return carritoxProducto;
     }
 
-    public void setC(Carrito c) {
-        this.c = c;
-    }
-
-    public Productos getP() {
-        return p;
-    }
-
-    public void setP(Productos p) {
-        this.p = p;
+    public void setCarritoxProducto(CarritoxProducto carritoxProducto) {
+        this.carritoxProducto = carritoxProducto;
     }
 }

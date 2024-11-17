@@ -3,7 +3,9 @@ package pe.edu.upc.trabajofinal.ServiceImplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.trabajofinal.Entities.Productos;
+import pe.edu.upc.trabajofinal.Entities.Usuario;
 import pe.edu.upc.trabajofinal.Repositories.IProductos;
+import pe.edu.upc.trabajofinal.Repositories.IUsuarioRepository;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.ProductosInterfaces;
 
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.List;
 public class ProductosImplements implements ProductosInterfaces {
     @Autowired
     private IProductos pR;
+    @Autowired
+    private IUsuarioRepository ur;
     @Override
     public List<Productos> list() {
         return pR.findAll();
@@ -18,6 +22,14 @@ public class ProductosImplements implements ProductosInterfaces {
 
     @Override
     public void add(Productos producto) {
+
+        if (producto.getU() != null && producto.getU().getIdUsuario() != 0) {
+            Usuario usuarioPersistido = ur.findById(producto.getU().getIdUsuario())
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            producto.setU(usuarioPersistido);
+        } else {
+            throw new RuntimeException("Usuario no especificado o ID de usuario no válido");
+        }
         pR.save(producto);
     }
 
@@ -41,21 +53,18 @@ public class ProductosImplements implements ProductosInterfaces {
         return pR.ProductoVencidos();
     }
 
-
     @Override
-    public List<String[]> ObtenerResenasProducto(String nombreProducto) {
-        return pR.ObtenerResenasProducto(nombreProducto);
+    public List<String[]> productosmasvendidos(int usuarioId) {
+        return pR.productosmasvendidos(usuarioId);
     }
 
     @Override
-    public List<String[]> GananciaTotalPorTienda() {
-        return pR.GananciaTotalPorTienda();
+    public List<String[]> ProductosConMenorStock() {
+        return  pR.ProductosConMenorStock();
     }
 
-    @Override
-    public List<String[]> TotalStockProductos() {
-        return pR.TotalStockProductos();
-    }
+
+
 
 
 }

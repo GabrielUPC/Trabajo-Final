@@ -1,47 +1,25 @@
 package pe.edu.upc.trabajofinal.dtos;
 
-import jakarta.persistence.Column;
+
+import pe.edu.upc.trabajofinal.Entities.Usuario;
 
 public class CarritoDTO {
+    private int id;
+    private Usuario u;
 
-    private Integer idCarrito;
-
-    private int cantidadCarrito;
-
-    private Double precioTotalCarrito;
-
-    private String estadoCarrito;
-
-    public Integer getIdCarrito() {
-        return idCarrito;
+    public int getId() {
+        return id;
     }
 
-    public void setIdCarrito(Integer idCarrito) {
-        this.idCarrito = idCarrito;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getCantidadCarrito() {
-        return cantidadCarrito;
+    public Usuario getU() {
+        return u;
     }
 
-    public void setCantidadCarrito(int cantidadCarrito) {
-        this.cantidadCarrito = cantidadCarrito;
-    }
-
-    public Double getPrecioTotalCarrito() {
-        return precioTotalCarrito;
-    }
-
-    public void setPrecioTotalCarrito(Double precioTotalCarrito) {
-        this.precioTotalCarrito = precioTotalCarrito;
-    }
-
-    public String getEstadoCarrito() {
-        return estadoCarrito;
-    }
-
-    public void setEstadoCarrito(String estadoCarrito) {
-        this.estadoCarrito = estadoCarrito;
+    public void setU(Usuario u) {
+        this.u = u;
     }
 }
-

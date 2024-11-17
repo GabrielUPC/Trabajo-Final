@@ -15,20 +15,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/metodo-pagos")
+@RequestMapping("/metodopagos")
 public class MetodoPagoController {
 
     @Autowired
     private IMetodoPagoInterface mP;
-    @PreAuthorize("hasRole('ADMIN')")
-    // Crear un nuevo método de pago
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')")
+
     @PostMapping
     public void insertar(@RequestBody MetodoPagoDTO dto){
         ModelMapper m=new ModelMapper();
         MetodoPago mp=m.map(dto,MetodoPago.class);
         mP.save(mp);
     }
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR')" )
     @GetMapping()
     public List<MetodoPagoDTO> list() {
         return mP.list().stream().map(x -> {
@@ -44,7 +44,6 @@ public class MetodoPagoController {
             return m.map(x, MetodoPagoDTO.class);
         }).collect(Collectors.toList());
     }
-
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('COMPRADOR') or hasAuthority('VENDEDOR')")
     @GetMapping("/{id}")
     public MetodoPagoDTO ordenarbyid(@PathVariable("id") Integer id) {
@@ -61,7 +60,7 @@ public class MetodoPagoController {
         mP.modificar(d);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') ")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id) {
         mP.deleteById(id);

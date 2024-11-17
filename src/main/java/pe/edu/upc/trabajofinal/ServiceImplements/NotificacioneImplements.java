@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pe.edu.upc.trabajofinal.Entities.Notificaciones;
 import pe.edu.upc.trabajofinal.Repositories.INotificaciones;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.INotificacionesInterfaces;
+import pe.edu.upc.trabajofinal.dtos.NotificacionIDDTO;
 
 import java.util.List;
 @Service
@@ -36,5 +37,10 @@ public class NotificacioneImplements implements INotificacionesInterfaces {
     @Override
     public void eliminar(int id) {
         nR.deleteById(id);
+    }
+
+    @Override
+    public List<String[]> buscarIDUS(int user_id) {
+        return nR.buscarIDUS(user_id);
     }
 }

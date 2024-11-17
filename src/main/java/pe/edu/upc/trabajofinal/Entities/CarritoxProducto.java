@@ -17,8 +17,6 @@ public class CarritoxProducto {
     @ManyToOne
     @JoinColumn(name = "idProducto", nullable = false)
     private Productos producto;
-
-
     @ManyToOne
     @JoinColumn(name = "idCarrito", nullable = false)
     private Carrito carrito;

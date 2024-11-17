@@ -10,8 +10,8 @@ public class Notificaciones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idNotificacion;
-    @Column(name="Contenido",nullable = false,length = 100)
-    private String Contenido;
+    @Column(name="contenido",nullable = false,length = 100)
+    private String contenido;
     @Column(name="fecha",nullable = false)
     private LocalDate fecha;
     @ManyToOne
@@ -22,7 +22,7 @@ public class Notificaciones {
 
     public Notificaciones(int idNotificacion, String contenido, LocalDate fecha, Usuario u) {
         this.idNotificacion = idNotificacion;
-        Contenido = contenido;
+        this.contenido = contenido;
         this.fecha = fecha;
         this.u = u;
     }
@@ -36,11 +36,11 @@ public class Notificaciones {
     }
 
     public String getContenido() {
-        return Contenido;
+        return contenido;
     }
 
     public void setContenido(String contenido) {
-        Contenido = contenido;
+        this.contenido = contenido;
     }
 
     public LocalDate getFecha() {

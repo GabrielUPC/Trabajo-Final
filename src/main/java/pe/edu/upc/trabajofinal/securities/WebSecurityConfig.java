@@ -1,4 +1,4 @@
-package pe.edu.upc.trabajofinal.Securities;
+package pe.edu.upc.trabajofinal.securities;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +21,8 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
+//@Profile(value = {"development", "production"})
+//Clase S7
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -28,10 +30,13 @@ public class WebSecurityConfig {
 
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @Autowired
     private UserDetailsService jwtUserDetailsService;
+
     @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private JwtRequestFilter  jwtRequestFilter;
+
     @Autowired
     @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver exceptionResolver;
@@ -53,18 +58,12 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-
+        //Desde Spring Boot 3.1+
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers(
-                                "/swagger-ui/**",     // Permitir acceso a Swagger UI
-                                "/v3/api-docs/**",    // Permitir acceso a OpenAPI docs
-                                "/swagger-resources/**", // Permitir acceso a recursos de Swagger
-                                "/webjars/**",        // Permitir acceso a recursos de Webjars
-                                "/login"              // Permitir acceso a la ruta de login
-                        ).permitAll()
-                        .anyRequest().authenticated() // Proteger todas las demás rutas
+                        .requestMatchers(antMatcher("/login")).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractHttpConfigurer::disable)

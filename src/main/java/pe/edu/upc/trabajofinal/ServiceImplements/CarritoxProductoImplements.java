@@ -39,8 +39,8 @@ public class CarritoxProductoImplements implements ICarritoxProductoInterfaces {
     }
 
     @Override
-    public Double calcularMontoTotal(int idCarrito) {
-        return cpR.calcularMontoTotal(idCarrito);
+    public List<String[]> findCarritosUsuarioId(int usuarioId) {
+        return cpR.findCarritosUsuarioId(usuarioId);
     }
 
 

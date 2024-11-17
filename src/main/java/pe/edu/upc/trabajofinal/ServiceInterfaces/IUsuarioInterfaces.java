@@ -13,6 +13,6 @@ public interface IUsuarioInterfaces {
     public void modificar(Usuario usuario);
     public void eliminar(int id);
     List<String[]> UsuarioReclamo();
-
+    public int getUserIdFromUsername(String username);
 
 }

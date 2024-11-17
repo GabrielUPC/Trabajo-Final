@@ -1,11 +1,15 @@
-package pe.edu.upc.trabajofinal.Securities;
+package pe.edu.upc.trabajofinal.securities;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+import pe.edu.upc.trabajofinal.Entities.Usuario;
+import pe.edu.upc.trabajofinal.Repositories.IUsuarioRepository;
+
 import javax.crypto.spec.SecretKeySpec;
 import java.io.Serializable;
 import java.util.Base64;
@@ -15,9 +19,11 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+//Clase 1
 @Component
 public class JwtTokenUtil implements Serializable {
-
+    @Autowired
+    private IUsuarioRepository usuarioRepository;
     private static final long serialVersionUID = -2550185165626007488L;
 
     //milisegundos || 18 minutos, le quitamos mil 18 segundos demo
@@ -55,7 +61,9 @@ public class JwtTokenUtil implements Serializable {
     //generate token for user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("nombre", "gabriel");
+        Usuario usuario = usuarioRepository.findOneByUsername(userDetails.getUsername());
+
+        claims.put("nombre",  usuario.getNombre());
         claims.put("role", userDetails.getAuthorities().stream().map(r -> r.getAuthority()).collect(Collectors.joining()));
         return doGenerateToken(claims, userDetails.getUsername());
     }

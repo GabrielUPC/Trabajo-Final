@@ -3,10 +3,10 @@ package pe.edu.upc.trabajofinal.ServiceImplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.trabajofinal.Entities.Usuario;
 import pe.edu.upc.trabajofinal.Repositories.IUsuarioRepository;
@@ -30,7 +30,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> roles = new ArrayList<>();
 
         user.getRoles().forEach(rol -> {
-            roles.add(new SimpleGrantedAuthority(rol.getRoleName()));
+            roles.add(new SimpleGrantedAuthority(rol.getRolname()));
         });
 
         UserDetails ud = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getEnabled(), true, true, true, roles);

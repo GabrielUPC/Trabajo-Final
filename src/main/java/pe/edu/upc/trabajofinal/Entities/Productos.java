@@ -18,32 +18,16 @@ public class Productos {
     @Column(name="estadoProducto",nullable = false,length = 20)
     private String estadoProducto;
     @Column(name="fecha_vencimientoProducto",nullable = false)
-    private LocalDate fecha_vencimientoProducto;
+    private LocalDate fechavencimiento;
     @Column(name="stockProducto",nullable = false)
     private int stockProducto;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="idUsuario")
     private Usuario u;
     @ManyToOne
-    @JoinColumn(name="idTiendas")
-    private Tiendas t;
-    @ManyToOne
-    @JoinColumn(name="idOfertas")
+    @JoinColumn(name="idOferta")
     private Oferta o;
     public Productos() {}
-
-    public Productos(int idProducto, String nombreProducto, String descripcionProducto, double precioProducto, String estadoProducto, LocalDate fecha_vencimientoProducto, int stockProducto, Usuario u, Tiendas t, Oferta o) {
-        this.idProducto = idProducto;
-        this.nombreProducto = nombreProducto;
-        this.descripcionProducto = descripcionProducto;
-        this.precioProducto = precioProducto;
-        this.estadoProducto = estadoProducto;
-        this.fecha_vencimientoProducto = fecha_vencimientoProducto;
-        this.stockProducto = stockProducto;
-        this.u = u;
-        this.t = t;
-        this.o = o;
-    }
 
     public int getIdProducto() {
         return idProducto;
@@ -85,12 +69,12 @@ public class Productos {
         this.estadoProducto = estadoProducto;
     }
 
-    public LocalDate getFecha_vencimientoProducto() {
-        return fecha_vencimientoProducto;
+    public LocalDate getFechavencimiento() {
+        return fechavencimiento;
     }
 
-    public void setFecha_vencimientoProducto(LocalDate fecha_vencimientoProducto) {
-        this.fecha_vencimientoProducto = fecha_vencimientoProducto;
+    public void setFechavencimiento(LocalDate fechavencimiento) {
+        this.fechavencimiento = fechavencimiento;
     }
 
     public int getStockProducto() {
@@ -107,14 +91,6 @@ public class Productos {
 
     public void setU(Usuario u) {
         this.u = u;
-    }
-
-    public Tiendas getT() {
-        return t;
-    }
-
-    public void setT(Tiendas t) {
-        this.t = t;
     }
 
     public Oferta getO() {

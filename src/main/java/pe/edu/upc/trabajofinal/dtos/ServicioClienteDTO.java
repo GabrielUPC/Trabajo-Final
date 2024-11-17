@@ -1,6 +1,9 @@
 package pe.edu.upc.trabajofinal.dtos;
 
 
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import pe.edu.upc.trabajofinal.Entities.Usuario;
 
 import java.time.LocalDate;
@@ -11,7 +14,7 @@ public class ServicioClienteDTO {
 
     private String nombre;
 
-    private LocalDate fecha_servicio;
+    private LocalDate fechaservicio;
 
     private String descripcion;
 
@@ -33,12 +36,12 @@ public class ServicioClienteDTO {
         this.nombre = nombre;
     }
 
-    public LocalDate getFecha_servicio() {
-        return fecha_servicio;
+    public LocalDate getFechaservicio() {
+        return fechaservicio;
     }
 
-    public void setFecha_servicio(LocalDate fecha_servicio) {
-        this.fecha_servicio = fecha_servicio;
+    public void setFechaservicio(LocalDate fechaservicio) {
+        this.fechaservicio = fechaservicio;
     }
 
     public String getDescripcion() {

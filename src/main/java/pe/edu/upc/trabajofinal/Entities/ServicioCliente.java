@@ -4,26 +4,26 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 @Entity
-@Table(name="ServicioCliente")
+@Table(name="serviciocliente")
 public class ServicioCliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name ="nombre",length = 10,nullable = false)
     private String nombre;
-    @Column(name ="fecha_servicio",nullable = false)
-    private LocalDate fecha_servicio;
+    @Column(name ="fechaservicio",nullable = false)
+    private LocalDate fechaservicio;
     @Column(name ="descripcion",length = 100,nullable = false)
     private String descripcion;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idUsuario")
     private Usuario u;
     public ServicioCliente() {}
 
-    public ServicioCliente(int id, String nombre, LocalDate fecha_servicio, String descripcion, Usuario u) {
+    public ServicioCliente(int id, String nombre, LocalDate fechaservicio, String descripcion, Usuario u) {
         this.id = id;
         this.nombre = nombre;
-        this.fecha_servicio = fecha_servicio;
+        this.fechaservicio = fechaservicio;
         this.descripcion = descripcion;
         this.u = u;
     }
@@ -44,12 +44,12 @@ public class ServicioCliente {
         this.nombre = nombre;
     }
 
-    public LocalDate getFecha_servicio() {
-        return fecha_servicio;
+    public LocalDate getFechaservicio() {
+        return fechaservicio;
     }
 
-    public void setFecha_servicio(LocalDate fecha_servicio) {
-        this.fecha_servicio = fecha_servicio;
+    public void setFechaservicio(LocalDate fechaservicio) {
+        this.fechaservicio = fechaservicio;
     }
 
     public String getDescripcion() {

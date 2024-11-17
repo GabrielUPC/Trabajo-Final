@@ -4,7 +4,9 @@ import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.trabajofinal.Entities.ServicioCliente;
+import pe.edu.upc.trabajofinal.Entities.Usuario;
 import pe.edu.upc.trabajofinal.Repositories.IServicioCliente;
+import pe.edu.upc.trabajofinal.Repositories.IUsuarioRepository;
 import pe.edu.upc.trabajofinal.ServiceInterfaces.IServicioClienteInterfaces;
 
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.List;
 public class ServicioClienteServiceImplement implements IServicioClienteInterfaces {
     @Autowired
     private IServicioCliente sC;
+    @Autowired
+    private IUsuarioRepository ur;
     @Override
     public List<ServicioCliente> list() {
         return sC.findAll();
@@ -19,6 +23,13 @@ public class ServicioClienteServiceImplement implements IServicioClienteInterfac
 
     @Override
     public void insert(ServicioCliente sc) {
+        if (sc.getU() != null && sc.getU().getIdUsuario() != 0) {
+            Usuario usuarioPersistido = ur.findById(sc.getU().getIdUsuario())
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            sc.setU(usuarioPersistido);
+        } else {
+            throw new RuntimeException("Usuario no especificado o ID de usuario no válido");
+        }
         sC.save(sc);
     }
 
@@ -35,5 +46,10 @@ public class ServicioClienteServiceImplement implements IServicioClienteInterfac
     @Override
     public void eliminar(int id) {
         sC.deleteById(id);
+    }
+
+    @Override
+    public List<String[]> findServiciosByUsuarioId(int usuarioId) {
+        return sC.findServiciosByUsuarioId(usuarioId);
     }
 }

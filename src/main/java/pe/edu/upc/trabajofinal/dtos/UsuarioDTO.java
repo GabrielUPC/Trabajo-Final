@@ -1,11 +1,5 @@
 package pe.edu.upc.trabajofinal.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import pe.edu.upc.trabajofinal.Entities.Roles;
-
-import java.util.List;
-
 public class UsuarioDTO {
 
     private int idUsuario;
@@ -20,13 +14,11 @@ public class UsuarioDTO {
 
     private String telefono;
 
+    private String username;
+
     private String password;
 
     private Boolean enabled;
-
-    private String username;
-
-
 
     public int getIdUsuario() {
         return idUsuario;
@@ -76,6 +68,14 @@ public class UsuarioDTO {
         this.telefono = telefono;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -91,14 +91,4 @@ public class UsuarioDTO {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-
 }

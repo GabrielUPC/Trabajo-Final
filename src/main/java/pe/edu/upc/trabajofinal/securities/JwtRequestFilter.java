@@ -1,10 +1,11 @@
-package pe.edu.upc.trabajofinal.Securities;
+package pe.edu.upc.trabajofinal.securities;
 
+
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,7 +15,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import pe.edu.upc.trabajofinal.ServiceImplements.JwtUserDetailsService;
 
+
 import java.io.IOException;
+
+//Clase 6
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
@@ -57,4 +61,5 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         chain.doFilter(request, response);
     }
+
 }

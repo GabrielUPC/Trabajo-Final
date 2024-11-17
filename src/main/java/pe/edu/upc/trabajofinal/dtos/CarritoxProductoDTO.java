@@ -1,6 +1,7 @@
 package pe.edu.upc.trabajofinal.dtos;
 import pe.edu.upc.trabajofinal.Entities.Carrito;
 import pe.edu.upc.trabajofinal.Entities.Productos;
+import pe.edu.upc.trabajofinal.Entities.Usuario;
 
 public class CarritoxProductoDTO {
 
@@ -8,6 +9,7 @@ public class CarritoxProductoDTO {
     private int cantidadCarrito;
     private Productos producto;
     private Carrito carrito;
+
 
     public int getIdCarritoXProducto() {
         return idCarritoXProducto;
@@ -40,4 +42,5 @@ public class CarritoxProductoDTO {
     public void setCarrito(Carrito carrito) {
         this.carrito = carrito;
     }
+
 }

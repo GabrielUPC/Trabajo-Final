@@ -1,8 +1,6 @@
 package pe.edu.upc.trabajofinal.dtos;
 
-import jakarta.persistence.*;
 import pe.edu.upc.trabajofinal.Entities.Oferta;
-import pe.edu.upc.trabajofinal.Entities.Tiendas;
 import pe.edu.upc.trabajofinal.Entities.Usuario;
 
 import java.time.LocalDate;
@@ -19,16 +17,13 @@ public class ProductosDTO {
 
     private String estadoProducto;
 
-    private LocalDate fecha_vencimientoProducto;
+    private LocalDate fechavencimiento;
 
     private int stockProducto;
 
     private Usuario u;
 
-    private Tiendas t;
-
     private Oferta o;
-
 
     public int getIdProducto() {
         return idProducto;
@@ -70,12 +65,12 @@ public class ProductosDTO {
         this.estadoProducto = estadoProducto;
     }
 
-    public LocalDate getFecha_vencimientoProducto() {
-        return fecha_vencimientoProducto;
+    public LocalDate getFechavencimiento() {
+        return fechavencimiento;
     }
 
-    public void setFecha_vencimientoProducto(LocalDate fecha_vencimientoProducto) {
-        this.fecha_vencimientoProducto = fecha_vencimientoProducto;
+    public void setFechavencimiento(LocalDate fechavencimiento) {
+        this.fechavencimiento = fechavencimiento;
     }
 
     public int getStockProducto() {
@@ -94,14 +89,6 @@ public class ProductosDTO {
         this.u = u;
     }
 
-    public Tiendas getT() {
-        return t;
-    }
-
-    public void setT(Tiendas t) {
-        this.t = t;
-    }
-
     public Oferta getO() {
         return o;
     }
@@ -109,5 +96,4 @@ public class ProductosDTO {
     public void setO(Oferta o) {
         this.o = o;
     }
-
 }

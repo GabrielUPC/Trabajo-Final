@@ -1,5 +1,6 @@
 package pe.edu.upc.trabajofinal.ServiceInterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.trabajofinal.Entities.Productos;
 
 import java.util.List;
@@ -11,8 +12,8 @@ public interface ProductosInterfaces {
     public void modificar(Productos producto);
     public Productos listid(int id);
     List<String[]> ProductoVencidos();
-    List<String[]> ObtenerResenasProducto(String nombreProducto);
-    List<String[]> GananciaTotalPorTienda();
-    List<String[]> TotalStockProductos();
+    public List<String[]> productosmasvendidos(int usuarioId);
+
+    public List<String[]> ProductosConMenorStock();
 
 }

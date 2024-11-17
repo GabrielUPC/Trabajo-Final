@@ -3,6 +3,7 @@ package pe.edu.upc.trabajofinal.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="Pedido")
@@ -18,22 +19,18 @@ public class Pedido {
     private String estado;
 
     @OneToOne
-    @JoinColumn(name="idCarrito")
-    private Carrito c;
-    @OneToOne
-    @JoinColumn(name="idProducto")
-    private Productos p;
+    @JoinColumn(name = "idCarritoXProducto")
+    private CarritoxProducto carritoxProducto;
 
     public Pedido() {
     }
 
-    public Pedido(int idPedido, LocalDate fechacPedido, LocalDate fechaEntrega, String estado, Carrito c, Productos p) {
+    public Pedido(int idPedido, LocalDate fechacPedido, LocalDate fechaEntrega, String estado, CarritoxProducto carritoxProducto) {
         this.idPedido = idPedido;
         this.fechacPedido = fechacPedido;
         this.fechaEntrega = fechaEntrega;
         this.estado = estado;
-        this.c = c;
-        this.p = p;
+        this.carritoxProducto = carritoxProducto;
     }
 
     public int getIdPedido() {
@@ -68,19 +65,11 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public Carrito getC() {
-        return c;
+    public CarritoxProducto getCarritoxProducto() {
+        return carritoxProducto;
     }
 
-    public void setC(Carrito c) {
-        this.c = c;
-    }
-
-    public Productos getP() {
-        return p;
-    }
-
-    public void setP(Productos p) {
-        this.p = p;
+    public void setCarritoxProducto(CarritoxProducto carritoxProducto) {
+        this.carritoxProducto = carritoxProducto;
     }
 }

@@ -6,7 +6,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name="Oferta")
-public class Oferta {
+public class
+Oferta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idOferta;
@@ -16,26 +17,29 @@ public class Oferta {
     private LocalDate fechaInicio;
     @Column(name="fechaFin", nullable=false)
     private LocalDate fechaFin;
-    @Column(name="CantidadProductos", nullable=false)
-    private int CantidadProductos;
-
+    @Column(name="cantidad", nullable=false)
+    private int cantidad;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="idUsuario")
+    private Usuario u;
     public Oferta() {
     }
 
-    public Oferta(int id, String nombreOferta, LocalDate fechaInicio, LocalDate fechaFin, int cantidadProductos) {
-        this.idOferta = id;
+    public Oferta(int idOferta, String nombreOferta, LocalDate fechaInicio, LocalDate fechaFin, int cantidad, Usuario u) {
+        this.idOferta = idOferta;
         this.nombreOferta = nombreOferta;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        CantidadProductos = cantidadProductos;
+        this.cantidad = cantidad;
+        this.u = u;
     }
 
-    public Integer getId() {
+    public int getIdOferta() {
         return idOferta;
     }
 
-    public void setId(Integer id) {
-        this.idOferta = id;
+    public void setIdOferta(int idOferta) {
+        this.idOferta = idOferta;
     }
 
     public String getNombreOferta() {
@@ -62,11 +66,19 @@ public class Oferta {
         this.fechaFin = fechaFin;
     }
 
-    public int getCantidadProductos() {
-        return CantidadProductos;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setCantidadProductos(int cantidadProductos) {
-        CantidadProductos = cantidadProductos;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Usuario getU() {
+        return u;
+    }
+
+    public void setU(Usuario u) {
+        this.u = u;
     }
 }

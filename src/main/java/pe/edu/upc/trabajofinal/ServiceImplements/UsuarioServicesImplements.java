@@ -42,4 +42,9 @@ public class UsuarioServicesImplements implements IUsuarioInterfaces {
         return usuarioRepository.UsuarioReclamo();
     }
 
+
+    public int getUserIdFromUsername(String username) {
+        Usuario usuario = usuarioRepository.findOneByUsername(username);
+        return usuario != null ? usuario.getIdUsuario() : -1; // Retorna -1 si no se encuentra el usuario
+    }
 }

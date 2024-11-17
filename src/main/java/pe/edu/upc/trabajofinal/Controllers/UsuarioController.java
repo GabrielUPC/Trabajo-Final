@@ -24,7 +24,7 @@ public class UsuarioController {
     private IUsuarioInterfaces uService;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR') or hasAuthority('COMPRADOR')")
     @GetMapping
     public List<UsuarioListDTO> listar(){
         return uService.list().stream().map(x->{
@@ -48,19 +48,19 @@ public class UsuarioController {
         UsuarioDTO dto=m.map(uService.listId(id), UsuarioDTO.class);
         return dto;
     }
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR') or hasAuthority('COMPRADOR')")
     @PutMapping
     public void modificar(@RequestBody UsuarioDTO dto){
         ModelMapper m=new ModelMapper();
         Usuario u=m.map(dto, Usuario.class);
         uService.modificar(u);
     }
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR') or hasAuthority('COMPRADOR')")
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Integer id){
         uService.eliminar(id);
     }
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('VENDEDOR') or hasAuthority('COMPRADOR')")
     @GetMapping("/usuariosReclamos")
     public List<UsuarioReclamoDTO> UsuarioReclamo(){
         List<String[]> lista = uService.UsuarioReclamo();

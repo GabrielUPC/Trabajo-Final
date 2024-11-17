@@ -9,13 +9,11 @@ public class NotificacionesDTO {
 
     private int idNotificacion;
 
-    private String Contenido;
+    private String contenido;
 
     private LocalDate fecha;
 
     private Usuario u;
-
-
 
     public int getIdNotificacion() {
         return idNotificacion;
@@ -26,11 +24,11 @@ public class NotificacionesDTO {
     }
 
     public String getContenido() {
-        return Contenido;
+        return contenido;
     }
 
     public void setContenido(String contenido) {
-        Contenido = contenido;
+        this.contenido = contenido;
     }
 
     public LocalDate getFecha() {
